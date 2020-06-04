@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+_book_files/*
+*-tikzDictionary
+*.rds
+
+*.utf8.md
+*.knit.md
+*.log
