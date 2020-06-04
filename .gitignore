@@ -3,7 +3,7 @@
 .RData
 .Ruserdata
 
-_book_files/*
+_bookdown_files/*
 *-tikzDictionary
 *.rds
 
