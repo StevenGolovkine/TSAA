@@ -10,3 +10,5 @@ _bookdown_files/*
 *.utf8.md
 *.knit.md
 *.log
+
+notebooks/.ipynb_checkpoints/*
