@@ -1,5 +1,6 @@
 # Characteristics of Time Series
 
+## Exercices
 
 ```julia
 # Load packages
@@ -11,7 +12,7 @@ using StatsBase
 matplotlib.rcParams["text.usetex"] = true;
 ```
 
-## Exercise 1.1
+### Exercices 1.1
 
 
 ```julia
@@ -38,7 +39,7 @@ show()
 
 We observe that the earthquake follows the explosion. There should be a high correlation between the moment of the explosion and few moments later for the earthquake. Secondly, the intensity of the earthquake might depend on the intensity of the explosion.
 
-## Exercise 1.2
+### Exercices 1.2
 
 Let's assume the following signal-plus-noise model:
 $$x_t = s_t + w_t, \quad w_t \sim \mathcal{N}(0, 1)$$
@@ -152,7 +153,7 @@ show()
 
 The decreasing of the intensity of the first signal modulators is way larger than the second one.
 
-## Exercise 1.3
+### Exercices 1.3
 
 * *Question (a)*
 
@@ -298,7 +299,7 @@ Here, the moving average filter removes a bit the noise in the signal to recover
 The filtering behaves differently for the different examples. For the first one, as the signal is basically just noise, the filtering will remove this component and so, return something close to 0. For the second one, there is no noise is the signal, the filtering insert a time lag in the signal. And for the last one, the filtering performs both the denoising and the shift of the signal. To obtain just a denoising, the filtering should be centered around the value. Something like,
 $$v_t = (x_{t+2} + x_{t+1} + x_{t-1} + x_{t-2}) / 4.$$
 
-## Exercise 1.4
+### Exercices 1.4
 
 Show that the autocovariance function can be written as
 $$\gamma(s, t) = \mathbb{E}(x_sx_t) - \mu_s\mu_t, \quad\text{where}\quad \mathbb{E}(x_t) = \mu_t.$$
@@ -310,7 +311,7 @@ $$\gamma(s, t) = \mathbb{E}(x_sx_t) - \mu_s\mu_t, \quad\text{where}\quad \mathbb
              &= \mathbb{E}(x_sx_t) - \mu_s\mu_t
 \end{align}
 
-## Exercise 1.5
+### Exercices 1.5
 
 Recall the two series in the exercise 1.2:
 
@@ -370,7 +371,7 @@ The autocovariance of the series will be the same, that is:
                \right.
 \end{align}
 
-## Exercise 1.6
+### Exercices 1.6
 
 Consider the time series
 $$x_t = \beta_1 + \beta_2t + w_t,$$
@@ -429,7 +430,7 @@ The autocovariance function is, for all $h$,
                \right.
 \end{align}
 
-## Exercise 1.7
+### Exercices 1.7
 
 Consider the moving average process 
 $$x_t = w_{t-1} + 2w_t + w_{t+1},$$
@@ -476,7 +477,7 @@ show()
 ![](./figures/01-characteristics-time-series/output_33_0.png)
 
 
-## Exercise 1.8
+### Exercices 1.8
 
 Consider the random walk with drift model
 $$x_t = \delta + x_{t-1} + w_t, \quad t = 1, 2, \dots$$
@@ -513,7 +514,7 @@ Consider the serie: $y_t = x_t - x_{t-1} = \delta + w_t$.
 
 Then, the serie is stationary because: $\mathbb{E}(y_t) = \delta$ and $\gamma(s, t) = \sigma^2\mathbb{1}(s = t)$.
 
-## Exercise 1.9
+### Exercices 1.9
 
 Consider the serie
 $$x_t = U_1\sin(2\pi\omega_0t) + U_2\cos(2\pi\omega_0t)$$
@@ -533,7 +534,7 @@ The autocovariance function is
 
 Thus, the serie is weakly stationary with the given autocovariance function.
 
-## Exercise 1.10
+### Exercices 1.10
 
 Suppose we would like to predict a single stationary series $x_t$ with zero mean and autocorrelation function $gamma(h)$ at some time in the future $t + l$, for $l > 0$.
 
@@ -564,7 +565,7 @@ MSE(\rho(l)) = 0 &\Longleftrightarrow& 1 - \rho(l)^2 = 0 \\
                                        \right.
 \end{align}
 
-## Exercise 1.11
+### Exercices 1.11
 
 Consider the process
 $$x_t = \mu + \sum_{j = -\infty}^{\infty} \phi_j\omega_{t-j}, \quad \sum_{j=\infty}^{\infty}\lvert \phi_j \rvert < +\infty$$
@@ -602,13 +603,13 @@ $$\mathbb{E}(\lvert S - x_t\rvert^2) = \mathbb{E}(\lim\inf \lvert S - x_t^q \rve
 
 And so, $x_t$ exists as a limit in mean square.
 
-## Exercise 1.12
+### Exercices 1.12
 
 Consider two weakly stationary series $x_t$ and $y_t$. Showing that $\rho_{xy}(h) = \rho_{yx}(-h)$ is equivalent to show $\gamma_{xy}(h) = \gamma_{yx}(-h)$. Then,
 $$\gamma_{xy}(h) = Cov(x_{t+h}, y_t) = Cov(x_u, y_{u-h}) = Cov(y_{u-h}, x_u) = \gamma_{yx}(-h).$$
 The main part of the proof is done by substitution: $u = t + h$.
 
-## Exercise 1.13
+### Exercices 1.13
 
 Consider the two series:
 $$x_t = w_t \quad\text{and}\quad y_t = w_t - \theta w_{t-1} + u_t,$$
@@ -655,7 +656,7 @@ $$\gamma_{xy}(h) = Cov(x_{t+h}, y_t) = Cov(w_{t+h}, w_t - \theta w_{t-1} + u_t) 
 
 $x_t$ and $y_t$ are jointly stationary because $\rho_{xy}(h)$ is a function only of lag $h$.
 
-## Exercise 1.14
+### Exercices 1.14
 
 Let $x_t$ be a stationary normal process with mean $\mu_x$ and autocovariance function $\gamma(h)$. Define the nonlinear time series $y_t = \exp(x_t)$.
 
@@ -678,7 +679,7 @@ Cov(y_{t+h}, y_t) &= \mathbb{E}\left((y_{t+h} - \mathbb{E}(y_{t+h}))(y_{t} - \ma
                   &= \exp(2\mu_x)\left(\exp\left(\frac{1}{2}(\gamma(h,h) + \gamma(0) + 2\gamma(h))\right) - \exp(\gamma(0))\right)
 \end{align*}
 
-## Exercise 1.15
+### Exercices 1.15
 
 Let $w_t$ be a normal white process, and consider the series
 $$x_t = w_tw_{t-1}.$$
@@ -699,7 +700,7 @@ $$Cov(x_t{t+h}, x_t) = Cov(w_{t+h}w_{t+h-1}, w_tw_{t-1}) = \mathbb{E}(w_{t+h}w_{
 
 The serie $x_t$ is stationary because the mean function is constant and the autocovariance function only depends on the time lag $h$.
 
-## Exercise 1.16
+### Exercices 1.16
 
 Consider the series $x_t = \sin(2\pi Ut)$, where $U$ has a uniform distribution on the interval $(0,1)$.
 
@@ -747,7 +748,7 @@ $$\mathbb{P}(X_2 \leq c) = \mathbb{P}(\sin(4\pi U) \leq c) = \mathbb{P}\left(U \
 
 Thus, $\mathbb{P}(X_1 \leq c) \neq \mathbb{P}(X_2 \leq c)$. Finally, the serie $x_t$ is not strictly stationary.
 
-## Exercise 1.17
+### Exercices 1.17
 
 Suppose we have a linear process $x_t$ generated by
 $$x_t = w_t - \theta w_{t-1}, \quad t = 0, 1, 2, \dots$$
@@ -767,7 +768,7 @@ where $\{w_t\}$ is independent and identically distributed with characteristic f
 
 The characteristic function of $x_1, \dots, x_n$ is independent of the time, because $\{w\}$ is independent and identically distributed. Thus, $x_t$ is strictly stationary.
 
-## Exercise 1.18
+### Exercices 1.18
 
 Let $x_t$ be a linear process of the form:
 $$x_t = \mu + \sum_{j = -\infty}^{+\infty} \phi_jw_{t-j}, \quad \sum_{j = -\infty}^{+\infty}\lvert \phi_j \rvert < +\infty,$$
@@ -780,7 +781,7 @@ where $\{w_t\}$ is a white noise process.
 &\leq +\infty
 \end{align*}
 
-## Exercise 1.19
+### Exercices 1.19
 
 Suppose $x_t = \mu + w_t + \theta w_{t-1}$, where $w_t \sim \mathcal{WN}(0, \sigma_w^2)$.
 
@@ -827,7 +828,7 @@ The standard error of the estimate of the mean is the square root of $Var(\bar{x
    - If $\theta = 0$, $Var(\bar{x}) = \frac{\sigma_w^2}{n} = \mathcal{o}(1)$.
    - If $\theta = -1$, $Var(\bar{x}) \approx 0$.
 
-## Exercise 1.20
+### Exercices 1.20
 
 * *Question (a)*
 
@@ -873,7 +874,7 @@ show()
 
 The changing of $n$ affects a lot the results, when $n = 500$ the ACF has converged yet while it's not the case when $n = 50$.
 
-## Exercise 1.21
+### Exercices 1.21
 
 * *Question (a)*
 
@@ -919,7 +920,7 @@ show()
 
 The changing of $n$ affects a bit the results. When $n = 50$, it looks like there is a periodic trend in the serie, while when $n = 500$, this trend tends to disappear and the ACF has converged.
 
-## Exercise 1.22
+### Exercices 1.22
 
 Let's assume the following signal-plus-noise model:
 $$x_t = s_t + w_t, \quad w_t \sim \mathcal{N}(0, 1)$$
@@ -952,7 +953,7 @@ show()
 
 We see in the autocorrelation function the exponential decresing of the serie (the $\exp\left(-t\right)$ part. Every even $h$, the ACF is equal to $0$ because of the $\cos(2\pi t)$ part.
 
-## Exercise 1.23
+### Exercices 1.23
 
 Consider the model
 $$x_t = 2\cos\left(2\pi \frac{t + 15}{50}\right) + w_t,$$
@@ -1012,7 +1013,7 @@ show()
 
 We see the periodic components of the serie in the ACF.
 
-## Exercise 1.24
+### Exercices 1.24
 
 Let $X$ be a latent variable representing the action of tossing a fair coin. We have that:
 $$\mathbb{P}(X = head) = \mathbb{P}(X = tail) = 0.5.$$
@@ -1042,7 +1043,7 @@ The autocovariance function of $y_t$ is
 Finally, we have that 
 $$\rho_y(1) = \frac{-0.7}{1 + 0.7^2} \quad\text{and}\quad \rho_y(h) = 0, \quad\text{if}\quad h > 1.$$
 
-## Exercise 1.25
+### Exercices 1.25
 
 * *Question (a)*
 
@@ -1066,7 +1067,7 @@ and $a^\top X_iX_i^\top a = (X_i^\top a)^\top(X_i^\top)a \geq 0$ for any column 
 
 Thus, $\Gamma_n$ is the sum of nonnegative definite matrices and consequently must also be nonnegative definite. It follows that $\hat{\gamma}(h)$ is nonnegative definite for any $h > 0$.
 
-## Exercise 1.26
+### Exercices 1.26
 
 Consider a collection of time series $x_{1t}, x_{2t}, \dots, x_{Nt}$ that are observing some common signal $\mu_t$ observed in noise processes $e_{1t}, e_{2t}, \dots, e_{Nt}$, with a model for the $j$th observed series given by
 $$x_{jt} = \mu_t + e_{jt}.$$
@@ -1091,7 +1092,7 @@ $$\mathbb{E}(\bar{x}_t) = \mathbb{E}\left(\frac{1}{N}\sum_{j=1}^N x_{jt}\right) 
 
 The common signal may be estimated using $\bar{x}_t$, because the square difference between $\bar{x}_t$ and the common signal goes to zero (in mean) as $N$ goes to infinity.
 
-## Exercise 1.27
+### Exercices 1.27
 
 Let $x_s, s = (s_1, s_2)$ be a spatial process. For $s_1, s_2 = 0, \pm 1, \pm 2, \dots$, defined the variogram
 $$V_x(h) = \frac{1}{2}\mathbb{E}((x_{s+h} - x_s)^2)$$
@@ -1106,7 +1107,7 @@ V_x(h) &= \frac{1}{2}\mathbb{E}((x_{s+h} - x_s)^2) \\
        &= \gamma(0) - \gamma(h)
 \end{align*}
 
-## Exercise 1.28
+### Exercices 1.28
  
 Suppose $x_t = \beta_0 + \beta_1t$, where $\beta_0$ ad $\beta_1$ are constants. We will prove that, as $n \rightarrow \infty$, $\hat{\rho}_x(h) \rightarrow 1$, for fixed $h$.
 
@@ -1134,7 +1135,7 @@ Then,
 
 Finally, $\hat{\rho}_x(h) = \mathcal{O}(1)$, as $n \rightarrow \infty$.
 
-## Exercise 1.29
+### Exercices 1.29
 
 * *Question (a)*
 
@@ -1154,7 +1155,7 @@ Finally, $\sqrt{n}\bar{x} \overset{ms}{\rightarrow} 0$, which implies $\sqrt{n}\
 
 I think that the only process that satisfies the previous assumption in a constant process with mean $0$, because, in order to have $\sum_{h = -\infty}^\infty \gamma(h) = 0$, the variance of the process should be $0$ and only deterministic processes have null variance. Moreover, it should have zero mean. And, for a deterministic process, only constant ones have mean that does not depend on time.
 
-## Exercise 1.30
+### Exercices 1.30
 
 Let $x_t$ be a linear process of the form
 $$x_t = \mu_x + \sum_{j = -\infty}^{\infty} \psi_j w_{t-j}$$
@@ -1214,7 +1215,7 @@ Finally, for the middle term, again using Cauchy-Schwarz inequality, we have:
 To conclude the proof, we write
 $$\mathbb{E}\left(\left\lvert n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right)\right\rvert\right) \leq \frac{nh + \sqrt{n(n - 2h)} + h}{n\sqrt{n}}\sigma^2\left(\sum_{j=-\infty}^{\infty} \lvert\psi_j\rvert\right)^2 \longrightarrow 0.$$
 
-## Exercise 1.31
+### Exercices 1.31
 
 Let $x_t$ be a linear process of the form
 $$x_t = \sum_{j=0}^\infty \phi^j w_{t-j}$$
@@ -1255,7 +1256,7 @@ A confidence for $\rho(1)$ (and so for $\phi$ is given by
 $$\left[\widehat{\rho}(1) - \mathcal{t}_{0.975, n-1}\sqrt{\frac{1 - \widehat{\rho}^2(1)}{n}}; \widehat{\rho}(1) + \mathcal{t}_{0.975, n-1}\sqrt{\frac{1 - \widehat{\rho}^2(1)}{n}}\right] = [0.49; 0.79],$$
 where $\mathcal{t}_{0.975, n-1}$ is the quantile of the student distribution at confidence level $97.5\%$ and $n-1$ degree of freedom. We use the student distribution, because we had to estimate the standard deviation of $\rho(1)$.
 
-## Exercise 1.32
+### Exercices 1.32
 
 Let $\{x_t, t = 0, \pm 1, \pm 2, \dots\}$ be iid$(0, \sigma^2)$.
 
