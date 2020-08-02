@@ -1,7 +1,7 @@
 --- 
 title: "Time Series Analysis and Its Applications"
 author: "Steven Golovkine"
-date: "2020-06-04"
+date: "2020-08-02"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

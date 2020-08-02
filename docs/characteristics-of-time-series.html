@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Characteristics of Time Series | Time Series Analysis and Its Applications</title>
+  <meta name="description" content="This book aims to provide my results to the different problems within Time Series Analysis and Its Application, with R examples, by Robert H. Shumway and David S. Stoffer" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Characteristics of Time Series | Time Series Analysis and Its Applications" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book aims to provide my results to the different problems within Time Series Analysis and Its Application, with R examples, by Robert H. Shumway and David S. Stoffer" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Characteristics of Time Series | Time Series Analysis and Its Applications" />
+  
+  <meta name="twitter:description" content="This book aims to provide my results to the different problems within Time Series Analysis and Its Application, with R examples, by Robert H. Shumway and David S. Stoffer" />
+  
+
+<meta name="author" content="Steven Golovkine" />
+
+
+<meta name="date" content="2020-08-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="methods.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Time Series Analysis and Its Applications</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html"><i class="fa fa-check"></i><b>2</b> Characteristics of Time Series</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.1"><i class="fa fa-check"></i><b>2.1</b> Exercise 1.1</a></li>
+<li class="chapter" data-level="2.2" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.2"><i class="fa fa-check"></i><b>2.2</b> Exercise 1.2</a></li>
+<li class="chapter" data-level="2.3" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.3"><i class="fa fa-check"></i><b>2.3</b> Exercise 1.3</a></li>
+<li class="chapter" data-level="2.4" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.4"><i class="fa fa-check"></i><b>2.4</b> Exercise 1.4</a></li>
+<li class="chapter" data-level="2.5" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.5"><i class="fa fa-check"></i><b>2.5</b> Exercise 1.5</a></li>
+<li class="chapter" data-level="2.6" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.6"><i class="fa fa-check"></i><b>2.6</b> Exercise 1.6</a></li>
+<li class="chapter" data-level="2.7" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.7"><i class="fa fa-check"></i><b>2.7</b> Exercise 1.7</a></li>
+<li class="chapter" data-level="2.8" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.8"><i class="fa fa-check"></i><b>2.8</b> Exercise 1.8</a></li>
+<li class="chapter" data-level="2.9" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.9"><i class="fa fa-check"></i><b>2.9</b> Exercise 1.9</a></li>
+<li class="chapter" data-level="2.10" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.10"><i class="fa fa-check"></i><b>2.10</b> Exercise 1.10</a></li>
+<li class="chapter" data-level="2.11" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.11"><i class="fa fa-check"></i><b>2.11</b> Exercise 1.11</a></li>
+<li class="chapter" data-level="2.12" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.12"><i class="fa fa-check"></i><b>2.12</b> Exercise 1.12</a></li>
+<li class="chapter" data-level="2.13" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.13"><i class="fa fa-check"></i><b>2.13</b> Exercise 1.13</a></li>
+<li class="chapter" data-level="2.14" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.14"><i class="fa fa-check"></i><b>2.14</b> Exercise 1.14</a></li>
+<li class="chapter" data-level="2.15" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.15"><i class="fa fa-check"></i><b>2.15</b> Exercise 1.15</a></li>
+<li class="chapter" data-level="2.16" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.16"><i class="fa fa-check"></i><b>2.16</b> Exercise 1.16</a></li>
+<li class="chapter" data-level="2.17" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.17"><i class="fa fa-check"></i><b>2.17</b> Exercise 1.17</a></li>
+<li class="chapter" data-level="2.18" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.18"><i class="fa fa-check"></i><b>2.18</b> Exercise 1.18</a></li>
+<li class="chapter" data-level="2.19" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.19"><i class="fa fa-check"></i><b>2.19</b> Exercise 1.19</a></li>
+<li class="chapter" data-level="2.20" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.20"><i class="fa fa-check"></i><b>2.20</b> Exercise 1.20</a></li>
+<li class="chapter" data-level="2.21" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.21"><i class="fa fa-check"></i><b>2.21</b> Exercise 1.21</a></li>
+<li class="chapter" data-level="2.22" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.22"><i class="fa fa-check"></i><b>2.22</b> Exercise 1.22</a></li>
+<li class="chapter" data-level="2.23" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.23"><i class="fa fa-check"></i><b>2.23</b> Exercise 1.23</a></li>
+<li class="chapter" data-level="2.24" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.24"><i class="fa fa-check"></i><b>2.24</b> Exercise 1.24</a></li>
+<li class="chapter" data-level="2.25" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.25"><i class="fa fa-check"></i><b>2.25</b> Exercise 1.25</a></li>
+<li class="chapter" data-level="2.26" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.26"><i class="fa fa-check"></i><b>2.26</b> Exercise 1.26</a></li>
+<li class="chapter" data-level="2.27" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.27"><i class="fa fa-check"></i><b>2.27</b> Exercise 1.27</a></li>
+<li class="chapter" data-level="2.28" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.28"><i class="fa fa-check"></i><b>2.28</b> Exercise 1.28</a></li>
+<li class="chapter" data-level="2.29" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.29"><i class="fa fa-check"></i><b>2.29</b> Exercise 1.29</a></li>
+<li class="chapter" data-level="2.30" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.30"><i class="fa fa-check"></i><b>2.30</b> Exercise 1.30</a></li>
+<li class="chapter" data-level="2.31" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.31"><i class="fa fa-check"></i><b>2.31</b> Exercise 1.31</a></li>
+<li class="chapter" data-level="2.32" data-path="characteristics-of-time-series.html"><a href="characteristics-of-time-series.html#exercise-1.32"><i class="fa fa-check"></i><b>2.32</b> Exercise 1.32</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
+<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Time Series Analysis and Its Applications</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="characteristics-of-time-series" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Characteristics of Time Series</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb1-1"><a href="characteristics-of-time-series.html#cb1-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-2"><a href="characteristics-of-time-series.html#cb1-2"></a><span class="kw">using</span> Distributions</span>
+<span id="cb1-3"><a href="characteristics-of-time-series.html#cb1-3"></a><span class="kw">using</span> PyPlot</span>
+<span id="cb1-4"><a href="characteristics-of-time-series.html#cb1-4"></a><span class="kw">using</span> RData</span>
+<span id="cb1-5"><a href="characteristics-of-time-series.html#cb1-5"></a><span class="kw">using</span> StatsBase</span>
+<span id="cb1-6"><a href="characteristics-of-time-series.html#cb1-6"></a></span>
+<span id="cb1-7"><a href="characteristics-of-time-series.html#cb1-7"></a>matplotlib.rcParams[<span class="st">&quot;text.usetex&quot;</span>] <span class="op">=</span> <span class="ex">true</span><span class="op">;</span></span></code></pre></div>
+<div id="exercise-1.1" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Exercise 1.1</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb2-1"><a href="characteristics-of-time-series.html#cb2-1"></a><span class="co"># Load data</span></span>
+<span id="cb2-2"><a href="characteristics-of-time-series.html#cb2-2"></a>EQ5 <span class="op">=</span> load(<span class="st">&quot;../data/EQ5.rda&quot;</span>)</span>
+<span id="cb2-3"><a href="characteristics-of-time-series.html#cb2-3"></a>EXP6 <span class="op">=</span> load(<span class="st">&quot;../data/EXP6.rda&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb3-1"><a href="characteristics-of-time-series.html#cb3-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb3-2"><a href="characteristics-of-time-series.html#cb3-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb3-3"><a href="characteristics-of-time-series.html#cb3-3"></a>plot(EXP6[<span class="st">&quot;EXP6&quot;</span>]<span class="op">,</span> label<span class="op">=</span><span class="st">&quot;Explosion&quot;</span>)</span>
+<span id="cb3-4"><a href="characteristics-of-time-series.html#cb3-4"></a>plot(EQ5[<span class="st">&quot;EQ5&quot;</span>]<span class="op">,</span> label<span class="op">=</span><span class="st">&quot;Earthquake&quot;</span>)</span>
+<span id="cb3-5"><a href="characteristics-of-time-series.html#cb3-5"></a>xlabel(<span class="st">&quot;Time&quot;</span>)</span>
+<span id="cb3-6"><a href="characteristics-of-time-series.html#cb3-6"></a>legend()</span>
+<span id="cb3-7"><a href="characteristics-of-time-series.html#cb3-7"></a>title(<span class="st">&quot;Arrival phase from an earthquake and explosion&quot;</span>)</span>
+<span id="cb3-8"><a href="characteristics-of-time-series.html#cb3-8"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_4_0.png" /></p>
+<p>We observe that the earthquake follows the explosion. There should be a high correlation between the moment of the explosion and few moments later for the earthquake. Secondly, the intensity of the earthquake might depend on the intensity of the explosion.</p>
+</div>
+<div id="exercise-1.2" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Exercise 1.2</h2>
+<p>Let’s assume the following signal-plus-noise model:
+<span class="math display">\[x_t = s_t + w_t, \quad w_t \sim \mathcal{N}(0, 1)\]</span></p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p><span class="math inline">\(x_t = s_t + w_t\)</span>, for <span class="math inline">\(t = 1, \dots, 200\)</span>, where</p>
+<p><span class="math display">\[s_t = \left\{
+    \begin{array}{l l} 
+        0, &amp; t = 1, \dots, 100 \\ 
+        10\exp\left(-\frac{(t - 100)}{20}\right)\cos(2\pi t / 4), &amp; t = 101, \dots, 200
+    \end{array}
+  \right.\]</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb4-1"><a href="characteristics-of-time-series.html#cb4-1"></a><span class="kw">function</span> signal_a(l)</span>
+<span id="cb4-2"><a href="characteristics-of-time-series.html#cb4-2"></a>    <span class="kw">return</span> [t <span class="op">&lt;</span> <span class="fl">101</span> ? <span class="fl">0</span> <span class="op">:</span> <span class="fl">10</span> <span class="op">*</span> exp(<span class="op">-</span>(t <span class="op">-</span> <span class="fl">100</span>) <span class="op">/</span> <span class="fl">20</span>) <span class="op">*</span> cos(<span class="fl">2</span> <span class="op">*</span> <span class="cn">pi</span> <span class="op">*</span> t <span class="op">/</span> <span class="fl">4</span>) <span class="kw">for</span> t <span class="kw">in</span> l]</span>
+<span id="cb4-3"><a href="characteristics-of-time-series.html#cb4-3"></a><span class="kw">end</span></span>
+<span id="cb4-4"><a href="characteristics-of-time-series.html#cb4-4"></a></span>
+<span id="cb4-5"><a href="characteristics-of-time-series.html#cb4-5"></a><span class="kw">function</span> signal_plus_noise_a(l)</span>
+<span id="cb4-6"><a href="characteristics-of-time-series.html#cb4-6"></a>    w <span class="op">=</span> rand(Normal()<span class="op">,</span> length(l))</span>
+<span id="cb4-7"><a href="characteristics-of-time-series.html#cb4-7"></a>    <span class="kw">return</span> signal_a(l) <span class="op">+</span> w</span>
+<span id="cb4-8"><a href="characteristics-of-time-series.html#cb4-8"></a><span class="kw">end</span></span></code></pre></div>
+<pre><code>signal_plus_noise_a (generic function with 1 method)</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb6-1"><a href="characteristics-of-time-series.html#cb6-1"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb6-2"><a href="characteristics-of-time-series.html#cb6-2"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">200</span><span class="op">,</span> signal_plus_noise_a(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">200</span>))</span>
+<span id="cb6-3"><a href="characteristics-of-time-series.html#cb6-3"></a>xlabel(L<span class="st">&quot;$t$&quot;</span>)</span>
+<span id="cb6-4"><a href="characteristics-of-time-series.html#cb6-4"></a>ylabel(L<span class="st">&quot;$x_t$&quot;</span>)</span>
+<span id="cb6-5"><a href="characteristics-of-time-series.html#cb6-5"></a>title(L<span class="st">&quot;x_t = s_t + w_t&quot;</span>)</span>
+<span id="cb6-6"><a href="characteristics-of-time-series.html#cb6-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_8_0.png" /></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p><span class="math inline">\(x_t = s_t + w_t\)</span>, for <span class="math inline">\(t = 1, \dots, 200\)</span>, where</p>
+<p><span class="math display">\[s_t = \left\{
+    \begin{array}{l l} 
+        0, &amp; t = 1, \dots, 100 \\ 
+        10\exp\left(-\frac{(t - 100)}{200}\right)\cos(2\pi t / 4), &amp; t = 101, \dots, 200
+    \end{array}
+  \right.\]</span></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb7-1"><a href="characteristics-of-time-series.html#cb7-1"></a><span class="kw">function</span> signal_b(l)</span>
+<span id="cb7-2"><a href="characteristics-of-time-series.html#cb7-2"></a>    <span class="kw">return</span> [t <span class="op">&lt;</span> <span class="fl">101</span> ? <span class="fl">0</span> <span class="op">:</span> <span class="fl">10</span> <span class="op">*</span> exp(<span class="op">-</span>(t <span class="op">-</span> <span class="fl">100</span>) <span class="op">/</span> <span class="fl">200</span>) <span class="op">*</span> cos(<span class="fl">2</span> <span class="op">*</span> <span class="cn">pi</span> <span class="op">*</span> t <span class="op">/</span> <span class="fl">4</span>) <span class="kw">for</span> t <span class="kw">in</span> l]</span>
+<span id="cb7-3"><a href="characteristics-of-time-series.html#cb7-3"></a><span class="kw">end</span></span>
+<span id="cb7-4"><a href="characteristics-of-time-series.html#cb7-4"></a></span>
+<span id="cb7-5"><a href="characteristics-of-time-series.html#cb7-5"></a><span class="kw">function</span> signal_plus_noise_b(l)</span>
+<span id="cb7-6"><a href="characteristics-of-time-series.html#cb7-6"></a>    w <span class="op">=</span> rand(Normal()<span class="op">,</span> length(l))</span>
+<span id="cb7-7"><a href="characteristics-of-time-series.html#cb7-7"></a>    <span class="kw">return</span> signal_b(l) <span class="op">+</span> w</span>
+<span id="cb7-8"><a href="characteristics-of-time-series.html#cb7-8"></a><span class="kw">end</span></span></code></pre></div>
+<pre><code>signal_plus_noise_b (generic function with 1 method)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb9-1"><a href="characteristics-of-time-series.html#cb9-1"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb9-2"><a href="characteristics-of-time-series.html#cb9-2"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">200</span><span class="op">,</span> signal_plus_noise_b(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">200</span>))</span>
+<span id="cb9-3"><a href="characteristics-of-time-series.html#cb9-3"></a>xlabel(L<span class="st">&quot;$t$&quot;</span>)</span>
+<span id="cb9-4"><a href="characteristics-of-time-series.html#cb9-4"></a>ylabel(L<span class="st">&quot;$x_t$&quot;</span>)</span>
+<span id="cb9-5"><a href="characteristics-of-time-series.html#cb9-5"></a>title(L<span class="st">&quot;x_t = s_t + w_t&quot;</span>)</span>
+<span id="cb9-6"><a href="characteristics-of-time-series.html#cb9-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_11_0.png" /></p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p>The serie (a) appears to be quite close to the explosion serie and the serie (b) appears to be quite close to the earthquake serie. Let’s plot the signal modulators (a) <span class="math inline">\(\exp(-t / 20)\)</span> and (b) <span class="math inline">\(\exp(-t / 200)\)</span>, for <span class="math inline">\(t = 1, \dots, 100\)</span>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb10-1"><a href="characteristics-of-time-series.html#cb10-1"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb10-2"><a href="characteristics-of-time-series.html#cb10-2"></a>plot([exp(<span class="op">-</span>t <span class="op">/</span> <span class="fl">20</span>) <span class="kw">for</span> t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>]<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;</span><span class="sc">\e</span><span class="st">xp(-t / 20)&quot;</span>)</span>
+<span id="cb10-3"><a href="characteristics-of-time-series.html#cb10-3"></a>plot([exp(<span class="op">-</span>t <span class="op">/</span> <span class="fl">200</span>) <span class="kw">for</span> t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>]<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;</span><span class="sc">\e</span><span class="st">xp(-t / 200)&quot;</span>)</span>
+<span id="cb10-4"><a href="characteristics-of-time-series.html#cb10-4"></a>xlabel(L<span class="st">&quot;$t$&quot;</span>)</span>
+<span id="cb10-5"><a href="characteristics-of-time-series.html#cb10-5"></a>title(<span class="st">&quot;Signal modulators&quot;</span>)</span>
+<span id="cb10-6"><a href="characteristics-of-time-series.html#cb10-6"></a>legend()</span>
+<span id="cb10-7"><a href="characteristics-of-time-series.html#cb10-7"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_13_0.png" /></p>
+<p>The decreasing of the intensity of the first signal modulators is way larger than the second one.</p>
+</div>
+<div id="exercise-1.3" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Exercise 1.3</h2>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>Consider the autoregression model:
+<span class="math display">\[x_t = -0.9x_{t-2} + w_t, \quad w_t \sim \mathcal{N}(0, 1).\]</span></p>
+<p>First, we will define a recursive filter function and a convolution filter function (based on the <a href="https://github.com/SurajGupta/r-source/blob/master/src/library/stats/src/filter.c">C function</a> of the <strong>R</strong> package stats).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb11-1"><a href="characteristics-of-time-series.html#cb11-1"></a><span class="kw">function</span> filter_recursive(x<span class="op">,</span> filter)</span>
+<span id="cb11-2"><a href="characteristics-of-time-series.html#cb11-2"></a>    nx <span class="op">=</span> length(x)</span>
+<span id="cb11-3"><a href="characteristics-of-time-series.html#cb11-3"></a>    nf <span class="op">=</span> length(filter)</span>
+<span id="cb11-4"><a href="characteristics-of-time-series.html#cb11-4"></a>    </span>
+<span id="cb11-5"><a href="characteristics-of-time-series.html#cb11-5"></a>    out <span class="op">=</span> vcat(x<span class="op">,</span> <span class="dt">Array</span>{<span class="dt">Float64</span>}(<span class="cn">undef</span><span class="op">,</span> nf))</span>
+<span id="cb11-6"><a href="characteristics-of-time-series.html#cb11-6"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>nx</span>
+<span id="cb11-7"><a href="characteristics-of-time-series.html#cb11-7"></a>        Σ <span class="op">=</span> x[i]</span>
+<span id="cb11-8"><a href="characteristics-of-time-series.html#cb11-8"></a>        <span class="kw">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>nf</span>
+<span id="cb11-9"><a href="characteristics-of-time-series.html#cb11-9"></a>            tmp <span class="op">=</span> out[i <span class="op">+</span> nf <span class="op">-</span> j]</span>
+<span id="cb11-10"><a href="characteristics-of-time-series.html#cb11-10"></a>            Σ <span class="op">+=</span> filter[j] <span class="op">*</span> tmp</span>
+<span id="cb11-11"><a href="characteristics-of-time-series.html#cb11-11"></a>        <span class="kw">end</span></span>
+<span id="cb11-12"><a href="characteristics-of-time-series.html#cb11-12"></a>        out[i <span class="op">+</span> nf] <span class="op">=</span> Σ</span>
+<span id="cb11-13"><a href="characteristics-of-time-series.html#cb11-13"></a>    <span class="kw">end</span></span>
+<span id="cb11-14"><a href="characteristics-of-time-series.html#cb11-14"></a>    <span class="kw">return</span> out[(nf <span class="op">+</span> <span class="fl">1</span>)<span class="op">:</span><span class="kw">end</span>]</span>
+<span id="cb11-15"><a href="characteristics-of-time-series.html#cb11-15"></a><span class="kw">end</span></span>
+<span id="cb11-16"><a href="characteristics-of-time-series.html#cb11-16"></a></span>
+<span id="cb11-17"><a href="characteristics-of-time-series.html#cb11-17"></a><span class="kw">function</span> filter_convolution(x<span class="op">,</span> filter<span class="op">,</span> sides)</span>
+<span id="cb11-18"><a href="characteristics-of-time-series.html#cb11-18"></a>    nx <span class="op">=</span> length(x)</span>
+<span id="cb11-19"><a href="characteristics-of-time-series.html#cb11-19"></a>    nf <span class="op">=</span> length(filter)</span>
+<span id="cb11-20"><a href="characteristics-of-time-series.html#cb11-20"></a>    </span>
+<span id="cb11-21"><a href="characteristics-of-time-series.html#cb11-21"></a>    nshift <span class="op">=</span> (sides <span class="op">==</span> <span class="fl">1</span>) ? <span class="fl">0</span> <span class="op">:</span> div(nf<span class="op">,</span> <span class="fl">2</span>)</span>
+<span id="cb11-22"><a href="characteristics-of-time-series.html#cb11-22"></a>    </span>
+<span id="cb11-23"><a href="characteristics-of-time-series.html#cb11-23"></a>    out <span class="op">=</span> <span class="dt">Array</span>{<span class="dt">Float64</span>}(<span class="cn">undef</span><span class="op">,</span> nx)</span>
+<span id="cb11-24"><a href="characteristics-of-time-series.html#cb11-24"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>nx</span>
+<span id="cb11-25"><a href="characteristics-of-time-series.html#cb11-25"></a>        z <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb11-26"><a href="characteristics-of-time-series.html#cb11-26"></a>        <span class="kw">if</span> (i <span class="op">+</span> nshift <span class="op">-</span> nf <span class="op">&lt;</span> <span class="fl">0</span>) <span class="op">||</span> (i <span class="op">+</span> nshift <span class="op">&gt;</span> nx)</span>
+<span id="cb11-27"><a href="characteristics-of-time-series.html#cb11-27"></a>            out[i] <span class="op">=</span> <span class="cn">NaN</span></span>
+<span id="cb11-28"><a href="characteristics-of-time-series.html#cb11-28"></a>            <span class="kw">continue</span></span>
+<span id="cb11-29"><a href="characteristics-of-time-series.html#cb11-29"></a>        <span class="kw">end</span></span>
+<span id="cb11-30"><a href="characteristics-of-time-series.html#cb11-30"></a>        <span class="kw">for</span> j <span class="kw">in</span> (max(<span class="fl">1</span><span class="op">,</span> i <span class="op">+</span> nshift <span class="op">-</span> nx))<span class="op">:</span>(min(nf<span class="op">,</span> i <span class="op">+</span> nshift <span class="op">-</span> <span class="fl">1</span>))</span>
+<span id="cb11-31"><a href="characteristics-of-time-series.html#cb11-31"></a>            tmp <span class="op">=</span> x[i <span class="op">+</span> nshift <span class="op">-</span> j]</span>
+<span id="cb11-32"><a href="characteristics-of-time-series.html#cb11-32"></a>            z <span class="op">+=</span> filter[j] <span class="op">*</span> tmp</span>
+<span id="cb11-33"><a href="characteristics-of-time-series.html#cb11-33"></a>        <span class="kw">end</span></span>
+<span id="cb11-34"><a href="characteristics-of-time-series.html#cb11-34"></a>        out[i] <span class="op">=</span> z</span>
+<span id="cb11-35"><a href="characteristics-of-time-series.html#cb11-35"></a>    <span class="kw">end</span></span>
+<span id="cb11-36"><a href="characteristics-of-time-series.html#cb11-36"></a>    <span class="kw">return</span> out</span>
+<span id="cb11-37"><a href="characteristics-of-time-series.html#cb11-37"></a><span class="kw">end</span></span></code></pre></div>
+<pre><code>filter_convolution (generic function with 1 method)</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb13-1"><a href="characteristics-of-time-series.html#cb13-1"></a>w <span class="op">=</span> rand(Normal()<span class="op">,</span> <span class="fl">500</span>)</span>
+<span id="cb13-2"><a href="characteristics-of-time-series.html#cb13-2"></a>x <span class="op">=</span> filter_recursive(w<span class="op">,</span> [<span class="fl">0</span><span class="op">,</span> <span class="op">-</span><span class="fl">0.9</span>])</span>
+<span id="cb13-3"><a href="characteristics-of-time-series.html#cb13-3"></a>x_filter <span class="op">=</span> filter_convolution(x<span class="op">,</span> [<span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span>]<span class="op">,</span> <span class="fl">1</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb14-1"><a href="characteristics-of-time-series.html#cb14-1"></a><span class="co"># Plot the time series</span></span>
+<span id="cb14-2"><a href="characteristics-of-time-series.html#cb14-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb14-3"><a href="characteristics-of-time-series.html#cb14-3"></a>plot(x<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;x_t&quot;</span>)</span>
+<span id="cb14-4"><a href="characteristics-of-time-series.html#cb14-4"></a>plot(x_filter<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;v_t&quot;</span>)</span>
+<span id="cb14-5"><a href="characteristics-of-time-series.html#cb14-5"></a>xlabel(L<span class="st">&quot;$t$&quot;</span>)</span>
+<span id="cb14-6"><a href="characteristics-of-time-series.html#cb14-6"></a>title(L<span class="st">&quot;x_t = -0.9x_{t-2} + w_t&quot;</span>)</span>
+<span id="cb14-7"><a href="characteristics-of-time-series.html#cb14-7"></a>legend()</span>
+<span id="cb14-8"><a href="characteristics-of-time-series.html#cb14-8"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_19_0.png" /></p>
+<p>The behavior of <span class="math inline">\(x_t\)</span> is very erratic, even if we might see some patterns within. The moving average filter completely change that behavior and smooth the serie such that no patterns are discernable.</p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>Consider the model:
+<span class="math display">\[x_t = \cos(2\pi t / 4).\]</span></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb15-1"><a href="characteristics-of-time-series.html#cb15-1"></a>x <span class="op">=</span> [cos(<span class="fl">2</span> <span class="op">*</span> <span class="cn">pi</span> <span class="op">*</span> t <span class="op">/</span> <span class="fl">4</span>) <span class="kw">for</span> t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">100</span>]</span>
+<span id="cb15-2"><a href="characteristics-of-time-series.html#cb15-2"></a>x_filter <span class="op">=</span> filter_convolution(x<span class="op">,</span> [<span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span>]<span class="op">,</span> <span class="fl">1</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb16-1"><a href="characteristics-of-time-series.html#cb16-1"></a><span class="co"># Plot the time series</span></span>
+<span id="cb16-2"><a href="characteristics-of-time-series.html#cb16-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb16-3"><a href="characteristics-of-time-series.html#cb16-3"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">100</span><span class="op">,</span> x<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;x_t&quot;</span>)</span>
+<span id="cb16-4"><a href="characteristics-of-time-series.html#cb16-4"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">100</span><span class="op">,</span> x_filter<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;v_t&quot;</span>)</span>
+<span id="cb16-5"><a href="characteristics-of-time-series.html#cb16-5"></a>xlabel(L<span class="st">&quot;$t$&quot;</span>)</span>
+<span id="cb16-6"><a href="characteristics-of-time-series.html#cb16-6"></a>title(L<span class="st">&quot;x_t = \cos(2\pi t / 4)&quot;</span>)</span>
+<span id="cb16-7"><a href="characteristics-of-time-series.html#cb16-7"></a>legend()</span>
+<span id="cb16-8"><a href="characteristics-of-time-series.html#cb16-8"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_22_0.png" /></p>
+<p>The moving average filter has the effect of shifting the signal in this case.</p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p>Consider the model:
+<span class="math display">\[x_t = \cos(2\pi t / 4) + w_t, \quad w_t \sim \mathcal{N}(0, 1).\]</span></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb17-1"><a href="characteristics-of-time-series.html#cb17-1"></a>w <span class="op">=</span> rand(Normal()<span class="op">,</span> <span class="fl">496</span>)</span>
+<span id="cb17-2"><a href="characteristics-of-time-series.html#cb17-2"></a>x <span class="op">=</span> [cos(<span class="fl">2</span> <span class="op">*</span> <span class="cn">pi</span> <span class="op">*</span> t <span class="op">/</span> <span class="fl">4</span>) <span class="kw">for</span> t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">100</span>] <span class="op">+</span> w</span>
+<span id="cb17-3"><a href="characteristics-of-time-series.html#cb17-3"></a>x_filter <span class="op">=</span> filter_convolution(x<span class="op">,</span> [<span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.25</span>]<span class="op">,</span> <span class="fl">1</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb18-1"><a href="characteristics-of-time-series.html#cb18-1"></a><span class="co"># Plot the time series</span></span>
+<span id="cb18-2"><a href="characteristics-of-time-series.html#cb18-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb18-3"><a href="characteristics-of-time-series.html#cb18-3"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">100</span><span class="op">,</span> x<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;x_t&quot;</span>)</span>
+<span id="cb18-4"><a href="characteristics-of-time-series.html#cb18-4"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">100</span><span class="op">,</span> x_filter<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;v_t&quot;</span>)</span>
+<span id="cb18-5"><a href="characteristics-of-time-series.html#cb18-5"></a>xlabel(L<span class="st">&quot;$t$&quot;</span>)</span>
+<span id="cb18-6"><a href="characteristics-of-time-series.html#cb18-6"></a>title(L<span class="st">&quot;x_t = \cos(2\pi t / 4) + w_t&quot;</span>)</span>
+<span id="cb18-7"><a href="characteristics-of-time-series.html#cb18-7"></a>legend()</span>
+<span id="cb18-8"><a href="characteristics-of-time-series.html#cb18-8"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_25_0.png" /></p>
+<p>Here, the moving average filter removes a bit the noise in the signal to recover the underlying “true” form of the signal.</p>
+<ul>
+<li><em>Question (d)</em></li>
+</ul>
+<p>The filtering behaves differently for the different examples. For the first one, as the signal is basically just noise, the filtering will remove this component and so, return something close to 0. For the second one, there is no noise is the signal, the filtering insert a time lag in the signal. And for the last one, the filtering performs both the denoising and the shift of the signal. To obtain just a denoising, the filtering should be centered around the value. Something like,
+<span class="math display">\[v_t = (x_{t+2} + x_{t+1} + x_{t-1} + x_{t-2}) / 4.\]</span></p>
+</div>
+<div id="exercise-1.4" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Exercise 1.4</h2>
+<p>Show that the autocovariance function can be written as
+<span class="math display">\[\gamma(s, t) = \mathbb{E}(x_sx_t) - \mu_s\mu_t, \quad\text{where}\quad \mathbb{E}(x_t) = \mu_t.\]</span></p>
+<p><span class="math display">\[\begin{align}
+\gamma(s, t) &amp;= \mathbb{E}\left((x_s - \mu_s)(x_t - \mu_t\right) \\
+             &amp;= \mathbb{E}\left(x_sx_t - \mu_sx_t - x_s\mu_t + \mu_s\mu_t\right) \\
+             &amp;= \mathbb{E}(x_sx_t) - \mu_s\mathbb{E}(x_t) - \mu_t\mathbb{E}(x_s) + \mu_s\mu_t \\
+             &amp;= \mathbb{E}(x_sx_t) - \mu_s\mu_t
+\end{align}\]</span></p>
+</div>
+<div id="exercise-1.5" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Exercise 1.5</h2>
+<p>Recall the two series in the exercise 1.2:</p>
+<ul>
+<li>First serie:
+<span class="math inline">\(x_t = s_t + w_t\)</span>, for <span class="math inline">\(t = 1, \dots, 200\)</span>, where</li>
+</ul>
+<p><span class="math display">\[s_t = \left\{
+    \begin{array}{l l} 
+        0, &amp; t = 1, \dots, 100 \\ 
+        10\exp\left(-\frac{(t - 100)}{20}\right)\cos(2\pi t / 4), &amp; t = 101, \dots, 200
+    \end{array}
+  \right.\]</span></p>
+<ul>
+<li>Second serie:
+<span class="math inline">\(x_t = s_t + w_t\)</span>, for <span class="math inline">\(t = 1, \dots, 200\)</span>, where</li>
+</ul>
+<p><span class="math display">\[s_t = \left\{
+    \begin{array}{l l} 
+        0, &amp; t = 1, \dots, 100 \\ 
+        10\exp\left(-\frac{(t - 100)}{200}\right)\cos(2\pi t / 4), &amp; t = 101, \dots, 200
+    \end{array}
+  \right.\]</span></p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>We are in the case of <em>signal plus noise</em> model. So, in both serie, the mean functions will be <span class="math inline">\(s(t)\)</span>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb19-1"><a href="characteristics-of-time-series.html#cb19-1"></a><span class="co"># Plot the mean functions</span></span>
+<span id="cb19-2"><a href="characteristics-of-time-series.html#cb19-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb19-3"><a href="characteristics-of-time-series.html#cb19-3"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">200</span><span class="op">,</span> signal_a(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">200</span>)<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;First~ s_t&quot;</span>)</span>
+<span id="cb19-4"><a href="characteristics-of-time-series.html#cb19-4"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">200</span><span class="op">,</span> signal_b(<span class="fl">1</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">200</span>)<span class="op">,</span> label<span class="op">=</span>L<span class="st">&quot;Second~ s_t&quot;</span>)</span>
+<span id="cb19-5"><a href="characteristics-of-time-series.html#cb19-5"></a>xlabel(L<span class="st">&quot;$t$&quot;</span>)</span>
+<span id="cb19-6"><a href="characteristics-of-time-series.html#cb19-6"></a>title(<span class="st">&quot;Mean functions&quot;</span>)</span>
+<span id="cb19-7"><a href="characteristics-of-time-series.html#cb19-7"></a>legend()</span>
+<span id="cb19-8"><a href="characteristics-of-time-series.html#cb19-8"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_29_0.png" /></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>The autocovariance of the series will be the same, that is:
+<span class="math display">\[\begin{align}
+\gamma(s,t) &amp;= Cov(x_s, x_t) \\
+            &amp;= Cov(s_s + w_s, s_t + w_t) \\
+            &amp;= Cov(s_s, s_t) + Cov(s_s, w_t) + Cov(s_t, w_s) + Cov(w_s, w_t) \\
+            &amp;= Cov(w_s, w_t) \\
+            &amp;= \left\{
+                    \begin{array}{r c l}
+                        1 &amp;if&amp; s = t\\
+                        0 &amp;if&amp; s \neq t \\
+                    \end{array}
+               \right.
+\end{align}\]</span></p>
+</div>
+<div id="exercise-1.6" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Exercise 1.6</h2>
+<p>Consider the time series
+<span class="math display">\[x_t = \beta_1 + \beta_2t + w_t,\]</span>
+where <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> are known constants and <span class="math inline">\(w_t\)</span> is a white noise process with variance <span class="math inline">\(\sigma^2_w\)</span>.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>The serie <span class="math inline">\(x_t\)</span> is not (weakly) stationary because its mean function depends on time <span class="math inline">\(t\)</span>:
+<span class="math display">\[\mu_x(t) = \beta_1 + \beta_2t.\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>Define the process <span class="math inline">\(y_t = x_t - x_{t - 1} = \beta_2 + w_t - w_{t - 1}\)</span>.</p>
+<p>The mean function of the process <span class="math inline">\(y_t\)</span> is <span class="math inline">\(\beta_2\)</span> and, so, does not depend on time <span class="math inline">\(t\)</span>.</p>
+<p>The autocovariance is:
+<span class="math display">\[\begin{align}
+\gamma(s, t) &amp;= Cov(y_s, y_t) \\
+             &amp;= Cov(\beta_2 + w_s - w_{s-1}, \beta_2 + w_t - w_{t-1}) \\
+             &amp;= Cov(w_s, w_t) - Cov(w_s, w_{t-1}) - Cov(w_{s-1}, w_t) + Cov(w_{s-1}, w_{t-1}) \\
+             &amp;= \left\{
+                    \begin{array}{r c l}
+                        2\sigma_w^2 &amp;if&amp; s - t = 0\\
+                        -\sigma_w^2 &amp;if&amp; \vert s - t \vert = 1\\
+                    \end{array}
+               \right.
+\end{align}\]</span></p>
+<p>So, the autocovariance only depends on the lag between <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> and not the absolute location of the points along the serie.</p>
+<p>Finally, as the variance is finite, the serie is (weakly) stationary.</p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p>The mean of the moving average is
+<span class="math display">\[\begin{align}
+\mathbb{E}(v_t) &amp;= \mathbb{E}\left(\frac{1}{2q + 1}\sum_{j=-q}^{q}x_{t-j}\right) \\
+                &amp;= \frac{1}{2q + 1}\sum_{j=-q}^{q}\mathbb{E}(x_{t-j}) \\
+                &amp;= \frac{1}{2q + 1}\sum_{j=-q}^{q}\mathbb{E}(\beta_1 + \beta_2(t-j) + w_{t-j}) \\
+                &amp;= \beta_1 + \beta_2t - \frac{\beta_2}{2q+1}\sum_{j=-q}^{q}j \\
+                &amp;= \beta_1 + \beta_2t
+\end{align}\]</span></p>
+<p>The autocovariance function is, for all <span class="math inline">\(h\)</span>,
+<span class="math display">\[\begin{align}
+\gamma(h) &amp;= Cov(v_t, v_{t + h}) \\
+          &amp;= Cov\left(\frac{1}{2q + 1}\sum_{j=-q}^{q}x_{t-j}, \frac{1}{2q + 1}\sum_{i=-q}^{q}x_{t-i+h}\right) \\
+          &amp;= \left(\frac{1}{2q + 1}\right)^2 Cov\left(\sum_{j=-q}^{q}w_{t-j},\sum_{i=-q}^{q}w_{t-i+h}\right) \\
+          &amp;= \left(\frac{\sigma}{2q + 1}\right)^2 \sum_{i, j = -q}^q \mathbb{1}(i - j = h) \\
+          &amp;= \left\{
+                    \begin{array}{r c l}
+                        \left(\frac{\sigma}{2q + 1}\right)^2  &amp;if&amp; \lvert h \rvert \leq 2q\\
+                        0 &amp;if&amp; \lvert h \rvert &gt; 2q\\
+                    \end{array}
+               \right.
+\end{align}\]</span></p>
+</div>
+<div id="exercise-1.7" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> Exercise 1.7</h2>
+<p>Consider the moving average process
+<span class="math display">\[x_t = w_{t-1} + 2w_t + w_{t+1},\]</span>
+where <span class="math inline">\(w_t\)</span> are independent with zero means and variacne <span class="math inline">\(\sigma_w^2\)</span>.</p>
+<p>The autocovariance function is
+<span class="math display">\[\begin{align}
+\gamma(h) &amp;= Cov(x_t, x_{t+h}) \\
+          &amp;= Cov(w_{t-1} + 2w_t - w_{t+1}, w_{t-1+h} + 2w_{t+h} - w_{t+1+h}) \\
+          &amp;= \left\{
+               \begin{array}{r c l}
+                 6\sigma_w^2 &amp;if&amp; h = 0\\
+                 4\sigma_w^2 &amp;if&amp; \vert h \vert = 1\\
+                 \sigma_w^2 &amp;if&amp; \vert h \vert = 2\\
+                 0 &amp;if&amp; \vert h \vert &gt; 2\\
+               \end{array}
+             \right.
+\end{align}\]</span></p>
+<p>The autocorrelation function is
+<span class="math display">\[\begin{align}
+\rho(h) &amp;= \gamma(h) / \gamma(0) \\
+        &amp;= \left\{
+             \begin{array}{r c l}
+               1 &amp;if&amp; h = 0\\
+               2/3 &amp;if&amp; \vert h \vert = 1\\
+               1/6 &amp;if&amp; \vert h \vert = 2\\
+               0 &amp;if&amp; \vert h \vert &gt; 2\\
+             \end{array}
+           \right.
+\end{align}\]</span></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb20-1"><a href="characteristics-of-time-series.html#cb20-1"></a><span class="co"># Plot the ACF</span></span>
+<span id="cb20-2"><a href="characteristics-of-time-series.html#cb20-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb20-3"><a href="characteristics-of-time-series.html#cb20-3"></a>stem(<span class="op">-</span><span class="fl">4</span><span class="op">:</span><span class="fl">4</span><span class="op">,</span> [<span class="fl">0</span><span class="op">,</span> <span class="fl">0</span><span class="op">,</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span><span class="op">,</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span> <span class="fl">1</span><span class="op">,</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span><span class="op">,</span> <span class="fl">0</span><span class="op">,</span> <span class="fl">0</span>]<span class="op">,</span> use_line_collection<span class="op">=</span><span class="ex">true</span>)</span>
+<span id="cb20-4"><a href="characteristics-of-time-series.html#cb20-4"></a>xlabel(L<span class="st">&quot;$h$&quot;</span>)</span>
+<span id="cb20-5"><a href="characteristics-of-time-series.html#cb20-5"></a>title(<span class="st">&quot;Autocorrelation function&quot;</span>)</span>
+<span id="cb20-6"><a href="characteristics-of-time-series.html#cb20-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_33_0.png" /></p>
+</div>
+<div id="exercise-1.8" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> Exercise 1.8</h2>
+<p>Consider the random walk with drift model
+<span class="math display">\[x_t = \delta + x_{t-1} + w_t, \quad t = 1, 2, \dots\]</span>
+with <span class="math inline">\(x_0 = 0\)</span>, where <span class="math inline">\(w_t\)</span> is white noise with variance <span class="math inline">\(\sigma_w^2\)</span>.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>Proof by induction:
+- <span class="math inline">\(x_1 = \delta + x_0 + w_1 = \delta + w_1\)</span>
+- Assume that the relation is true for <span class="math inline">\(x_t\)</span>, we have
+<span class="math display">\[x_{t + 1} = \delta + x_t + w_{t+1} = \delta + \left(\delta t + \sum_{k=1}^t w_k\right) + w_{k+1} = \delta(t+1) + \sum_{k=1}^{t+1} w_k.\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>The mean function of <span class="math inline">\(x_t\)</span> is
+<span class="math display">\[\mathbb{E}(x_t) = \mathbb{E}\left(\delta t + \sum_{k=1}^{t}w_{k}\right) = \delta t + \sum_{k=1}^{t}\mathbb{E}(w_{k}) = \delta t\]</span></p>
+<p>The autocovariance function of <span class="math inline">\(x_t\)</span> is
+<span class="math display">\[\gamma(s, t) = Cov(x_s, x_t) = Cov\left(\sum_{k=1}^s w_k, \sum_{j=1}^t w_j\right) = \sum_{k=1}^s \sum_{j=1}^t Cov(w_k, w_j) = \min(s, t)\sigma_w^2.\]</span></p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p><span class="math inline">\(x_t\)</span> is not stationary because its mean function depends on <span class="math inline">\(t\)</span> and its autocovariance function depends on the particular time values <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span>, and not on the time separation <span class="math inline">\(\lvert s - t \rvert\)</span>.</p>
+<ul>
+<li><em>Question (d)</em></li>
+</ul>
+<p><span class="math display">\[\rho(t-1, t) = \frac{\gamma(t-1, t)}{\sqrt{\gamma(t-1, t-1)\gamma(t, t)}} = \frac{(t-1)\sigma^2}{\sqrt{(t-1)\sigma^2(t)\sigma^2}} = \sqrt{\frac{t-1}{t}} = \sqrt{1 - \frac{1}{t}} \xrightarrow[t \rightarrow \infty]{} 1\]</span></p>
+<p>It means that, when <span class="math inline">\(t\)</span> goes to infinity, <span class="math inline">\(x_t\)</span> and <span class="math inline">\(x_{t-1}\)</span> are almost exactly the same thing. Intuitively, if we plot <span class="math inline">\(x_t\)</span> against <span class="math inline">\(x_{t-1}\)</span>, we should obtain a straight line that pass through <span class="math inline">\((0, 0)\)</span>.</p>
+<ul>
+<li><em>Question (e)</em></li>
+</ul>
+<p>Consider the serie: <span class="math inline">\(y_t = x_t - x_{t-1} = \delta + w_t\)</span>.</p>
+<p>Then, the serie is stationary because: <span class="math inline">\(\mathbb{E}(y_t) = \delta\)</span> and <span class="math inline">\(\gamma(s, t) = \sigma^2\mathbb{1}(s = t)\)</span>.</p>
+</div>
+<div id="exercise-1.9" class="section level2" number="2.9">
+<h2><span class="header-section-number">2.9</span> Exercise 1.9</h2>
+<p>Consider the serie
+<span class="math display">\[x_t = U_1\sin(2\pi\omega_0t) + U_2\cos(2\pi\omega_0t)\]</span>
+where <span class="math inline">\(U_1\)</span> and <span class="math inline">\(U_2\)</span> are independent random variables with zero means and <span class="math inline">\(\mathbb{E}(U_1^2) = \mathbb{E}(U_2^2) = \sigma^2\)</span>.</p>
+<p>The mean function is
+<span class="math display">\[\mathbb{E}(x_t) = \mathbb{E}(U_1\sin(2\pi\omega_0t) + U_2\cos(2\pi\omega_0t)) = \sin(2\pi\omega_0t)\mathbb{E}(U_1) + \cos(2\pi\omega_0t)\mathbb{E}(U_2) = 0.\]</span></p>
+<p>The autocovariance function is
+<span class="math display">\[\begin{align}
+\gamma(h) &amp;= Cov(x_t, x_{t+h}) \\
+          &amp;= Cov(U_1\sin(2\pi\omega_0t) + U_2\cos(2\pi\omega_0t), U_1\sin(2\pi\omega_0(t+h)) + U_2\cos(2\pi\omega_0(t+h)))\\
+          &amp;= \sin(2\pi\omega_0t)\sin(2\pi\omega_0(t+h))Cov(U_1, U_1) + \cos(2\pi\omega_0t)\cos(2\pi\omega_0(t+h))Cov(U_2, U_2)\\
+          &amp;= \sigma^2\cos(2\pi\omega_0t - 2\pi\omega_0(t+h))\\
+          &amp;= \sigma^2\cos(2\pi\omega_0h)
+\end{align}\]</span></p>
+<p>Thus, the serie is weakly stationary with the given autocovariance function.</p>
+</div>
+<div id="exercise-1.10" class="section level2" number="2.10">
+<h2><span class="header-section-number">2.10</span> Exercise 1.10</h2>
+<p>Suppose we would like to predict a single stationary series <span class="math inline">\(x_t\)</span> with zero mean and autocorrelation function <span class="math inline">\(gamma(h)\)</span> at some time in the future <span class="math inline">\(t + l\)</span>, for <span class="math inline">\(l &gt; 0\)</span>.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>Compute the derivative of <span class="math inline">\(MSE(A)\)</span> with respect to <span class="math inline">\(A\)</span>:
+<span class="math display">\[\frac{\partial MSE(A)}{\partial A} = -2\mathbb{E}(x_tx_{t+l}) + 2A\mathbb{E}(x_t^2).\]</span></p>
+<p>By setting the derivative to <span class="math inline">\(0\)</span>:
+<span class="math display">\[\frac{\partial MSE(A)}{\partial A} = 0 \Longleftrightarrow A = \frac{\mathbb{E}(x_tx_{t+l})}{\mathbb{E}(x_t^2)} = \frac{Cov(x_t, x_{t+l})}{Var(x_t)} = \frac{\gamma(l)}{\gamma(0)} = \rho(l).\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p><span class="math inline">\(MSE(\rho(l)) = \mathbb{E}(x_{t+l}^2) - 2\rho(l)\mathbb{E}(x_tx_{t+l}) + \rho(l)^2\mathbb{E}(x_t^2) = \gamma(0)\left[1 - \rho(l)^2\right]\)</span></p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p>Assume <span class="math inline">\(x_{t+l} = Ax_t\)</span>.</p>
+<p>Then, <span class="math display">\[\begin{align}
+MSE(\rho(l)) = 0 &amp;\Longleftrightarrow&amp; 1 - \rho(l)^2 = 0 \\
+                 &amp;\Longleftrightarrow&amp; \lvert \rho(l) \rvert = 1 \\
+                 &amp;\Longleftrightarrow&amp; \left\{
+                                         \begin{array}{r c l}
+                                               \rho(l) = 1 &amp;if&amp; A &gt; 0\\
+                                               \rho(l) = -1 &amp;if&amp; A &lt; 1\\
+                                         \end{array}
+                                       \right.
+\end{align}\]</span></p>
+</div>
+<div id="exercise-1.11" class="section level2" number="2.11">
+<h2><span class="header-section-number">2.11</span> Exercise 1.11</h2>
+<p>Consider the process
+<span class="math display">\[x_t = \mu + \sum_{j = -\infty}^{\infty} \phi_j\omega_{t-j}, \quad \sum_{j=\infty}^{\infty}\lvert \phi_j \rvert &lt; +\infty\]</span>
+where <span class="math inline">\(\omega_t \sim \mathcal{N}(0, \sigma^2)\)</span>.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>The autocovariance function is, for <span class="math inline">\(h \leq 0\)</span>,
+<span class="math display">\[\begin{align}
+\gamma(h) &amp;= Cov(x_{t+h}, x_t) \\
+          &amp;= Cov\left(\sum_{j = -\infty}^{\infty} \phi_j\omega_{t-j+h}, \sum_{k = -\infty}^{\infty} \phi_k\omega_{t-k}\right) \\
+          &amp;= \sum_{j = -\infty}^{\infty} \sum_{k = -\infty}^{\infty} \phi_j\phi_kCov(\omega_{t-j+h}, \omega_{t-k})\\
+          &amp;= \sigma^2\sum_{j = -\infty}^{\infty} \phi_{k+h}\phi_k
+\end{align}\]</span></p>
+<p>And by symmetry, we have <span class="math inline">\(\gamma(h) = \gamma(-h)\)</span>.</p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>Define <span class="math inline">\(x_t^q = \mu + \sum_{j = -q}^{q} \phi_j\omega_{t-j}\)</span>. In order to prove that <span class="math inline">\(x_t\)</span> exists as a limit in mean square, we would prove that <span class="math inline">\(x_t^q \longrightarrow x_t\)</span>. We have to show that <span class="math inline">\(\mathbb{E}\lvert x_t^p - x_t^q \rvert^2 \longrightarrow 0, p &gt; q &gt; 0\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+\mathbb{E}\lvert x_t^p - x_t^q \rvert^2 
+    &amp;= \mathbb{E}\left\lvert \sum_{j = -p}^{p} \phi_j\omega_{t-j} - \sum_{j = -q}^{q} \phi_j\omega_{t-j} \right\rvert^2 \\
+    &amp;= \mathbb{E}\left\lvert \sum_{q \leq \lvert j \rvert \leq p} \phi_j\omega_{t-j} \right\rvert^2 \\
+    &amp;= \sum_{q \leq \lvert j \rvert \leq p}\sum_{q \leq \lvert j \rvert \leq p}\phi_j\phi_k\mathbb{E}(\omega_{t-j}\omega_{t-k})\\
+    &amp;\leq \sum_{q \leq \lvert j \rvert \leq p}\sum_{q \leq \lvert j \rvert \leq p}\lvert\phi_j\rvert\lvert\phi_k\rvert\lvert\mathbb{E}(\omega_{t-j}\omega_{t-k})\rvert\\
+    &amp;\leq \sum_{q \leq \lvert j \rvert \leq p}\sum_{q \leq \lvert j \rvert \leq p}\lvert\phi_j\rvert\lvert\phi_k\rvert\mathbb{E}(\omega_{t-j}^2)^{1/2}\mathbb{E}(\omega_{t-k}^2)^{1/2}, \text{(Cauchy-Schwarz)}\\
+    &amp;\leq \sum_{q \leq \lvert j \rvert \leq p}\sum_{q \leq \lvert j \rvert \leq p}\lvert\phi_j\rvert\lvert\phi_k\rvert(\sigma^2 + \mu^2)^{1/2}(\sigma^2 + \mu^2)^{1/2}\\
+    &amp;= (\sigma^2 + \mu^2)\left(\sum_{q \leq \lvert j \rvert \leq p}\lvert\phi_j\rvert\right)^2 \longrightarrow 0
+\end{align}\]</span></p>
+<p>Let <span class="math inline">\(S\)</span> denotes the mean square limit of <span class="math inline">\(x_t^q\)</span>, then using Fatou’s lemma:
+<span class="math display">\[\mathbb{E}(\lvert S - x_t\rvert^2) = \mathbb{E}(\lim\inf \lvert S - x_t^q \rvert^2) \leq \lim\inf\mathbb{E}\lvert S - x_t^q\rvert^2 = 0.\]</span></p>
+<p>And so, <span class="math inline">\(x_t\)</span> exists as a limit in mean square.</p>
+</div>
+<div id="exercise-1.12" class="section level2" number="2.12">
+<h2><span class="header-section-number">2.12</span> Exercise 1.12</h2>
+<p>Consider two weakly stationary series <span class="math inline">\(x_t\)</span> and <span class="math inline">\(y_t\)</span>. Showing that <span class="math inline">\(\rho_{xy}(h) = \rho_{yx}(-h)\)</span> is equivalent to show <span class="math inline">\(\gamma_{xy}(h) = \gamma_{yx}(-h)\)</span>. Then,
+<span class="math display">\[\gamma_{xy}(h) = Cov(x_{t+h}, y_t) = Cov(x_u, y_{u-h}) = Cov(y_{u-h}, x_u) = \gamma_{yx}(-h).\]</span>
+The main part of the proof is done by substitution: <span class="math inline">\(u = t + h\)</span>.</p>
+</div>
+<div id="exercise-1.13" class="section level2" number="2.13">
+<h2><span class="header-section-number">2.13</span> Exercise 1.13</h2>
+<p>Consider the two series:
+<span class="math display">\[x_t = w_t \quad\text{and}\quad y_t = w_t - \theta w_{t-1} + u_t,\]</span>
+where <span class="math inline">\(w_t\)</span> and <span class="math inline">\(u_t\)</span> are independent white noise series with variance <span class="math inline">\(\sigma_w^2\)</span> and <span class="math inline">\(\sigma_u^2\)</span>, respectively, and <span class="math inline">\(\theta\)</span> is an unspecified constant.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+\gamma_y(h) &amp;= Cov(y_{t+h}, y_t) \\
+            &amp;= Cov(w_{t+h} - \theta w_{t-1+h} + u_{t+h}, w_t - \theta w_{t-1} + u_t) \\
+            &amp;= \left\{
+                \begin{array}{c l l}
+                    (1 + \theta^2)\sigma_w^2 + \sigma_u^2 &amp;\text{if}&amp; h = 0\\
+                    -\theta\sigma_w^2 &amp;\text{if}&amp; |h| = 1 \\
+                    0 &amp;\text{else}&amp;
+                \end{array}
+               \right.
+\end{align*}\]</span></p>
+<p>So,
+<span class="math display">\[\rho_y(h) = \left\{
+                \begin{array}{c l l}
+                    1 &amp;\text{if}&amp; h = 0\\
+                    -\frac{\theta\sigma_w^2}{(1 + \theta^2)\sigma_w^2 + \sigma_u^2} &amp;\text{if}&amp; |h| = 1 \\
+                    0 &amp;\text{else}&amp;
+                \end{array}
+               \right.\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>We have that
+<span class="math display">\[\rho_{xy}(h) = \frac{\gamma_{xy}(h)}{\sqrt{\gamma_x(0)\gamma_y(0)}}, \quad \gamma_x(0) = \sigma_w^2, \quad \gamma_y(0) = (1 + \theta^2)\sigma_w^2 + \sigma_u^2\]</span>
+and
+<span class="math display">\[\gamma_{xy}(h) = Cov(x_{t+h}, y_t) = Cov(w_{t+h}, w_t - \theta w_{t-1} + u_t) = 
+    \left\{
+        \begin{array}{c l l}
+            \sigma_w^2 &amp;\text{if}&amp; h = 0\\
+            -\theta\sigma_w^2 &amp;\text{if}&amp; h = -1 \\
+            0 &amp;\text{else}&amp;
+        \end{array}
+    \right.\]</span></p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p><span class="math inline">\(x_t\)</span> and <span class="math inline">\(y_t\)</span> are jointly stationary because <span class="math inline">\(\rho_{xy}(h)\)</span> is a function only of lag <span class="math inline">\(h\)</span>.</p>
+</div>
+<div id="exercise-1.14" class="section level2" number="2.14">
+<h2><span class="header-section-number">2.14</span> Exercise 1.14</h2>
+<p>Let <span class="math inline">\(x_t\)</span> be a stationary normal process with mean <span class="math inline">\(\mu_x\)</span> and autocovariance function <span class="math inline">\(\gamma(h)\)</span>. Define the nonlinear time series <span class="math inline">\(y_t = \exp(x_t)\)</span>.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>The serie <span class="math inline">\(y_t\)</span> is defined as the moment generating function of <span class="math inline">\(x_t\)</span> evaluated at <span class="math inline">\(1\)</span>, <span class="math inline">\(\mathbb{E}(y_t) = M_x(1)\)</span>.</p>
+<p><span class="math display">\[\mathbb{E}(y_t) = \mathbb{E}(\exp(x_t)) = \exp(\mu + \gamma(0)/2).\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>The sum of the two normal random variables <span class="math inline">\(x_{t+h} + x_t\)</span> is a normal random variable. Thus,
+<span class="math display">\[x_{t+h} + x_t \sim \mathcal{N}(2\mu_x, \gamma(h,h) + \gamma(0) + 2\gamma(h)).\]</span></p>
+<p><span class="math display">\[\begin{align*}
+Cov(y_{t+h}, y_t) &amp;= \mathbb{E}\left((y_{t+h} - \mathbb{E}(y_{t+h}))(y_{t} - \mathbb{E}(y_t))\right) \\
+                  &amp;= \mathbb{E}(y_{t+h}y_t) - \mathbb{E}(y_{t+h})\mathbb{E}(y_t) \\
+                  &amp;= \mathbb{E}(\exp(x_{t+h} + x_t)) - \exp(\mu_x + \gamma(0)/2)^2 \\
+                  &amp;= \exp(2\mu_x + (\gamma(h,h) + \gamma(0) + 2\gamma(h)/2) - \exp(\mu_x + \gamma(0)/2)^2 \\
+                  &amp;= \exp(2\mu_x)\left(\exp\left(\frac{1}{2}(\gamma(h,h) + \gamma(0) + 2\gamma(h))\right) - \exp(\gamma(0))\right)
+\end{align*}\]</span></p>
+</div>
+<div id="exercise-1.15" class="section level2" number="2.15">
+<h2><span class="header-section-number">2.15</span> Exercise 1.15</h2>
+<p>Let <span class="math inline">\(w_t\)</span> be a normal white process, and consider the series
+<span class="math display">\[x_t = w_tw_{t-1}.\]</span></p>
+<ul>
+<li>Mean</li>
+</ul>
+<p><span class="math display">\[\mathbb{E}(x_t) = \mathbb{E}(w_tw_{t-1}) = \mathbb{E}(w_t)\mathbb{E}(w_{t-1}) = 0\]</span></p>
+<ul>
+<li>Autocovariance</li>
+</ul>
+<p><span class="math display">\[Cov(x_t{t+h}, x_t) = Cov(w_{t+h}w_{t+h-1}, w_tw_{t-1}) = \mathbb{E}(w_{t+h}w_{t+h-1}w_tw_{t-1}) = 
+    \left\{
+     \begin{array}{c l l}
+      \sigma_w^4 &amp;\text{if}&amp; h = 0\\
+      0 &amp;\text{else}&amp;
+     \end{array}
+    \right.\]</span></p>
+<p>The serie <span class="math inline">\(x_t\)</span> is stationary because the mean function is constant and the autocovariance function only depends on the time lag <span class="math inline">\(h\)</span>.</p>
+</div>
+<div id="exercise-1.16" class="section level2" number="2.16">
+<h2><span class="header-section-number">2.16</span> Exercise 1.16</h2>
+<p>Consider the series <span class="math inline">\(x_t = \sin(2\pi Ut)\)</span>, where <span class="math inline">\(U\)</span> has a uniform distribution on the interval <span class="math inline">\((0,1)\)</span>.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}(x_t) &amp;= \mathbb{E}(\sin(2\pi Ut)) \\
+                &amp;= \int_0^1 \sin(2\pi ut)du \\
+                &amp;= \frac{1}{2\pi t}\left(1 - \cos(2\pi t)\right)
+\end{align*}\]</span></p>
+<p>As <span class="math inline">\(t = 1, 2, \dots\)</span>, <span class="math inline">\(\cos(2\pi t) = 1\)</span>, and thus, <span class="math inline">\(\mathbb{E}(x_t) = 0\)</span>.</p>
+<p>If <span class="math inline">\(h \neq 0\)</span>, then
+<span class="math display">\[\begin{align*}
+\gamma(h) &amp;= Cov(x_{t+h}, x_t) \\
+          &amp;= Cov(\sin(2\pi U(t+h)), \sin(2\pi Ut)) \\
+          &amp;= \mathbb{E}(\sin(2\pi U(t+h))\sin(2\pi Ut)) \\
+          &amp;= \int_0^1 \sin(2\pi u(t+h))\sin(2\pi ut)du \\
+          &amp;= \frac{1}{2}\int_0^1 \left(\cos(2\pi uh) + \cos(2\pi u(2t+h))\right)du \\
+          &amp;= \frac{1}{2}\left(\frac{\sin(2\pi h)}{2\pi h} + \frac{\sin(2\pi (h+2t))}{2\pi (h + 2t)}\right) \\
+          &amp;= 0
+\end{align*}\]</span></p>
+<p>If <span class="math inline">\(h = 0\)</span>, then
+<span class="math display">\[\begin{align*}
+\gamma(0) &amp;= Cov(x_t, x_t) \\
+          &amp;= \mathbb{E}(\sin^2(2\pi Ut)) \\
+          &amp;= \int_0^1 \sin(2\pi ut)^2du \\
+          &amp;= \frac{1}{2} - \frac{\sin(4\pi t)}{8\pi t} \\
+          &amp;= \frac{1}{2}, \quad\text{for}~ t = 1, 2, \dots
+\end{align*}\]</span></p>
+<p>Thus, the serie <span class="math inline">\(x_t\)</span> is weakly stationary.</p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>We have:</p>
+<p><span class="math display">\[\mathbb{P}(X_1 \leq c) = \mathbb{P}(\sin(2\pi U) \leq c) = \mathbb{P}\left(U \leq \frac{1}{2\pi}\sin^{-1}(c)\right) = \frac{1}{2\pi}\sin^{-1}(c)\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\mathbb{P}(X_2 \leq c) = \mathbb{P}(\sin(4\pi U) \leq c) = \mathbb{P}\left(U \leq \frac{1}{4\pi}\sin^{-1}(c)\right) = \frac{1}{4\pi}\sin^{-1}(c)\]</span></p>
+<p>Thus, <span class="math inline">\(\mathbb{P}(X_1 \leq c) \neq \mathbb{P}(X_2 \leq c)\)</span>. Finally, the serie <span class="math inline">\(x_t\)</span> is not strictly stationary.</p>
+</div>
+<div id="exercise-1.17" class="section level2" number="2.17">
+<h2><span class="header-section-number">2.17</span> Exercise 1.17</h2>
+<p>Suppose we have a linear process <span class="math inline">\(x_t\)</span> generated by
+<span class="math display">\[x_t = w_t - \theta w_{t-1}, \quad t = 0, 1, 2, \dots\]</span>
+where <span class="math inline">\(\{w_t\}\)</span> is independent and identically distributed with characteristic function <span class="math inline">\(\phi_w(\cdot)\)</span> and <span class="math inline">\(\theta\)</span> a fixed constant.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+\phi_{x_1, \dots, x_n}(\lambda_1, \dots, \lambda_n) &amp;= \mathbb{E}(\exp(i\langle \lambda, x \rangle)) \\
+    &amp;= \mathbb{E}\left[\exp\left(i\sum_{j = 1}^n \lambda_jx_j\right)\right] \\
+    &amp;= \mathbb{E}\left[\exp\left(i\sum_{j = 1}^n \lambda_j(w_t - \theta w_{t-1})\right)\right] \\
+    &amp;= \mathbb{E}\left[\exp\left(i\sum_{j = 1}^n \lambda_jw_t\right)\right]\mathbb{E}\left[\exp\left(-i\sum_{j = 1}^n \lambda_j\theta w_{t-1}\right)\right] \\
+    &amp;= \prod_{i = 1}^n \phi_w(\lambda_i)\phi_w(-\theta\lambda_i)
+\end{align*}\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>The characteristic function of <span class="math inline">\(x_1, \dots, x_n\)</span> is independent of the time, because <span class="math inline">\(\{w\}\)</span> is independent and identically distributed. Thus, <span class="math inline">\(x_t\)</span> is strictly stationary.</p>
+</div>
+<div id="exercise-1.18" class="section level2" number="2.18">
+<h2><span class="header-section-number">2.18</span> Exercise 1.18</h2>
+<p>Let <span class="math inline">\(x_t\)</span> be a linear process of the form:
+<span class="math display">\[x_t = \mu + \sum_{j = -\infty}^{+\infty} \phi_jw_{t-j}, \quad \sum_{j = -\infty}^{+\infty}\lvert \phi_j \rvert &lt; +\infty,\]</span>
+where <span class="math inline">\(\{w_t\}\)</span> is a white noise process.</p>
+<p><span class="math display">\[\begin{align*}
+\sum_{h = -\infty}^{+\infty}\lvert \gamma(h) \rvert &amp;= \sum_{h = -\infty}^{+\infty}\left\lvert \sigma_w^2  \sum_{j = -\infty}^{+\infty} \phi_{j+h}\phi_j\right\rvert \\
+&amp;\leq \sigma_w^2\sum_{j = -\infty}^{+\infty}\sum_{h = -\infty}^{+\infty}\left\lvert \phi_{j+h}\right\rvert\left\lvert\phi_j \right\rvert \\
+&amp;\leq \sigma_w^2\sum_{j = -\infty}^{+\infty}\left\lvert\phi_j \right\rvert\sum_{h = -\infty}^{+\infty}\left\lvert \phi_{j+h}\right\rvert \\
+&amp;\leq +\infty
+\end{align*}\]</span></p>
+</div>
+<div id="exercise-1.19" class="section level2" number="2.19">
+<h2><span class="header-section-number">2.19</span> Exercise 1.19</h2>
+<p>Suppose <span class="math inline">\(x_t = \mu + w_t + \theta w_{t-1}\)</span>, where <span class="math inline">\(w_t \sim \mathcal{WN}(0, \sigma_w^2)\)</span>.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p><span class="math display">\[\mathbb{E}(x_t) = \mu + \mathbb{E}(w_t) + \theta\mathbb{E}(w_{t-1}) = \mu\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+\gamma_x(h) &amp;= Cov(x_t, x_{t+h}) \\
+            &amp;= Cov(\mu + w_t + \theta w_{t-1}, \mu + w_{t+h} + \theta w_{t+h-1}) \\
+            &amp;= Cov(w_t, w_{t+h}) + \theta Cov(w_t, w_{t+h-1}) + \theta Cov(w_{t-1}, w_{t+h}) + \theta^2Cov(w_{t-1}, w_{t+h-1}) \\
+            &amp;= \left\{
+                 \begin{array}{c l l}
+                      (1 + \theta^2)\sigma_w^2 &amp;\text{if}&amp; h = 0\\
+                      \theta \sigma_w^2 &amp;\text{if}&amp; \lvert h \rvert = 1 \\
+                      0 &amp;\text{else}
+                 \end{array}
+                \right.
+\end{align*}\]</span></p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p>For all values of <span class="math inline">\(\theta \in \mathbb{R}\)</span>, <span class="math inline">\(\mathbb{E}(x_t) = \mu\)</span> is independent of <span class="math inline">\(t\)</span> and <span class="math inline">\(\gamma_x(h)\)</span> depends only on <span class="math inline">\(h\)</span>. So, <span class="math inline">\(x_t\)</span> is stationary.</p>
+<ul>
+<li><em>Question (d)</em></li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+Var(\bar{x}) &amp;= \frac{1}{n}\sum_{h=-n}^n \left(1 - \frac{\lvert h \rvert}{n}\right)\gamma_x(h) \\
+             &amp;= \frac{1}{n}\left(2\left(1 - \frac{1}{n}\right)\theta \sigma_w^2 + (1 + \theta^2)\sigma_w^2\right)\\
+             &amp;= \frac{\sigma_w^2}{n}\left(2\left(1 - \frac{1}{n}\right)\theta + (1 + \theta^2)\right) \\
+\end{align*}\]</span></p>
+<ul>
+<li><p>If <span class="math inline">\(\theta = 1\)</span>, <span class="math inline">\(Var(\bar{x}) = \frac{\sigma_w^2}{n}\left(4 - \frac{2}{n}\right)\)</span>.</p></li>
+<li><p>If <span class="math inline">\(\theta = 0\)</span>, <span class="math inline">\(Var(\bar{x}) = \frac{\sigma_w^2}{n}\)</span>.</p></li>
+<li><p>If <span class="math inline">\(\theta = -1\)</span>, <span class="math inline">\(Var(\bar{x}) = \frac{2\sigma_w^2}{n^2}\)</span>.</p></li>
+<li><p><em>Question (e)</em></p></li>
+</ul>
+<p>The standard error of the estimate of the mean is the square root of <span class="math inline">\(Var(\bar{x})\)</span>.</p>
+<ul>
+<li>If <span class="math inline">\(\theta = 1\)</span>, <span class="math inline">\(Var(\bar{x}) \approx \frac{4\sigma_w^2}{n} = \mathcal{o}(1)\)</span>.</li>
+<li>If <span class="math inline">\(\theta = 0\)</span>, <span class="math inline">\(Var(\bar{x}) = \frac{\sigma_w^2}{n} = \mathcal{o}(1)\)</span>.</li>
+<li>If <span class="math inline">\(\theta = -1\)</span>, <span class="math inline">\(Var(\bar{x}) \approx 0\)</span>.</li>
+</ul>
+</div>
+<div id="exercise-1.20" class="section level2" number="2.20">
+<h2><span class="header-section-number">2.20</span> Exercise 1.20</h2>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb21-1"><a href="characteristics-of-time-series.html#cb21-1"></a>w <span class="op">=</span> rand(Normal()<span class="op">,</span> <span class="fl">500</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb22-1"><a href="characteristics-of-time-series.html#cb22-1"></a><span class="co"># Plot the ACF</span></span>
+<span id="cb22-2"><a href="characteristics-of-time-series.html#cb22-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb22-3"><a href="characteristics-of-time-series.html#cb22-3"></a>stem(<span class="fl">0</span><span class="op">:</span><span class="fl">20</span><span class="op">,</span> autocor(w<span class="op">,</span> <span class="fl">0</span><span class="op">:</span><span class="fl">20</span>)<span class="op">,</span> use_line_collection<span class="op">=</span><span class="ex">true</span>)</span>
+<span id="cb22-4"><a href="characteristics-of-time-series.html#cb22-4"></a>xlabel(L<span class="st">&quot;$h$&quot;</span>)</span>
+<span id="cb22-5"><a href="characteristics-of-time-series.html#cb22-5"></a>title(<span class="st">&quot;Autocorrelation function&quot;</span>)</span>
+<span id="cb22-6"><a href="characteristics-of-time-series.html#cb22-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_48_0.png" /></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb23-1"><a href="characteristics-of-time-series.html#cb23-1"></a>w <span class="op">=</span> rand(Normal()<span class="op">,</span> <span class="fl">50</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb24-1"><a href="characteristics-of-time-series.html#cb24-1"></a><span class="co"># Plot the ACF</span></span>
+<span id="cb24-2"><a href="characteristics-of-time-series.html#cb24-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb24-3"><a href="characteristics-of-time-series.html#cb24-3"></a>stem(<span class="fl">0</span><span class="op">:</span><span class="fl">20</span><span class="op">,</span> autocor(w<span class="op">,</span> <span class="fl">0</span><span class="op">:</span><span class="fl">20</span>)<span class="op">,</span> use_line_collection<span class="op">=</span><span class="ex">true</span>)</span>
+<span id="cb24-4"><a href="characteristics-of-time-series.html#cb24-4"></a>xlabel(L<span class="st">&quot;$h$&quot;</span>)</span>
+<span id="cb24-5"><a href="characteristics-of-time-series.html#cb24-5"></a>title(<span class="st">&quot;Autocorrelation function&quot;</span>)</span>
+<span id="cb24-6"><a href="characteristics-of-time-series.html#cb24-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_51_0.png" /></p>
+<p>The changing of <span class="math inline">\(n\)</span> affects a lot the results, when <span class="math inline">\(n = 500\)</span> the ACF has converged yet while it’s not the case when <span class="math inline">\(n = 50\)</span>.</p>
+</div>
+<div id="exercise-1.21" class="section level2" number="2.21">
+<h2><span class="header-section-number">2.21</span> Exercise 1.21</h2>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb25-1"><a href="characteristics-of-time-series.html#cb25-1"></a>w <span class="op">=</span> rand(Normal()<span class="op">,</span> <span class="fl">550</span>)<span class="op">;</span></span>
+<span id="cb25-2"><a href="characteristics-of-time-series.html#cb25-2"></a>v <span class="op">=</span> filter_convolution(w<span class="op">,</span> [<span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>]<span class="op">,</span> <span class="fl">2</span>)[<span class="fl">50</span><span class="op">:</span><span class="fl">549</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb26-1"><a href="characteristics-of-time-series.html#cb26-1"></a><span class="co"># Plot the ACF</span></span>
+<span id="cb26-2"><a href="characteristics-of-time-series.html#cb26-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb26-3"><a href="characteristics-of-time-series.html#cb26-3"></a>stem(<span class="fl">0</span><span class="op">:</span><span class="fl">20</span><span class="op">,</span> autocor(v<span class="op">,</span> <span class="fl">0</span><span class="op">:</span><span class="fl">20</span>)<span class="op">,</span> use_line_collection<span class="op">=</span><span class="ex">true</span>)</span>
+<span id="cb26-4"><a href="characteristics-of-time-series.html#cb26-4"></a>xlabel(L<span class="st">&quot;$h$&quot;</span>)</span>
+<span id="cb26-5"><a href="characteristics-of-time-series.html#cb26-5"></a>title(<span class="st">&quot;Autocorrelation function&quot;</span>)</span>
+<span id="cb26-6"><a href="characteristics-of-time-series.html#cb26-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_55_0.png" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb27-1"><a href="characteristics-of-time-series.html#cb27-1"></a>w <span class="op">=</span> rand(Normal()<span class="op">,</span> <span class="fl">100</span>)<span class="op">;</span></span>
+<span id="cb27-2"><a href="characteristics-of-time-series.html#cb27-2"></a>v <span class="op">=</span> filter_convolution(w<span class="op">,</span> [<span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>]<span class="op">,</span> <span class="fl">2</span>)[<span class="fl">50</span><span class="op">:</span><span class="fl">99</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb28-1"><a href="characteristics-of-time-series.html#cb28-1"></a><span class="co"># Plot the ACF</span></span>
+<span id="cb28-2"><a href="characteristics-of-time-series.html#cb28-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb28-3"><a href="characteristics-of-time-series.html#cb28-3"></a>stem(<span class="fl">0</span><span class="op">:</span><span class="fl">20</span><span class="op">,</span> autocor(v<span class="op">,</span> <span class="fl">0</span><span class="op">:</span><span class="fl">20</span>)<span class="op">,</span> use_line_collection<span class="op">=</span><span class="ex">true</span>)</span>
+<span id="cb28-4"><a href="characteristics-of-time-series.html#cb28-4"></a>xlabel(L<span class="st">&quot;$h$&quot;</span>)</span>
+<span id="cb28-5"><a href="characteristics-of-time-series.html#cb28-5"></a>title(<span class="st">&quot;Autocorrelation function&quot;</span>)</span>
+<span id="cb28-6"><a href="characteristics-of-time-series.html#cb28-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_57_0.png" /></p>
+<p>The changing of <span class="math inline">\(n\)</span> affects a bit the results. When <span class="math inline">\(n = 50\)</span>, it looks like there is a periodic trend in the serie, while when <span class="math inline">\(n = 500\)</span>, this trend tends to disappear and the ACF has converged.</p>
+</div>
+<div id="exercise-1.22" class="section level2" number="2.22">
+<h2><span class="header-section-number">2.22</span> Exercise 1.22</h2>
+<p>Let’s assume the following signal-plus-noise model:
+<span class="math display">\[x_t = s_t + w_t, \quad w_t \sim \mathcal{N}(0, 1)\]</span></p>
+<p><span class="math display">\[s_t = \left\{
+    \begin{array}{l l} 
+        0, &amp; t = 1, \dots, 100 \\ 
+        10\exp\left(-\frac{(t - 100)}{20}\right)\cos(2\pi t / 4), &amp; t = 101, \dots, 200
+    \end{array}
+  \right.\]</span></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb29-1"><a href="characteristics-of-time-series.html#cb29-1"></a>x <span class="op">=</span> signal_plus_noise_a(<span class="fl">1</span><span class="op">:</span><span class="fl">200</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb30-1"><a href="characteristics-of-time-series.html#cb30-1"></a><span class="co"># Plot the ACF</span></span>
+<span id="cb30-2"><a href="characteristics-of-time-series.html#cb30-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb30-3"><a href="characteristics-of-time-series.html#cb30-3"></a>stem(<span class="fl">0</span><span class="op">:</span><span class="fl">23</span><span class="op">,</span> autocor(x)<span class="op">,</span> use_line_collection<span class="op">=</span><span class="ex">true</span>)</span>
+<span id="cb30-4"><a href="characteristics-of-time-series.html#cb30-4"></a>xlabel(L<span class="st">&quot;$h$&quot;</span>)</span>
+<span id="cb30-5"><a href="characteristics-of-time-series.html#cb30-5"></a>title(<span class="st">&quot;Autocorrelation function&quot;</span>)</span>
+<span id="cb30-6"><a href="characteristics-of-time-series.html#cb30-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_61_0.png" /></p>
+<p>We see in the autocorrelation function the exponential decresing of the serie (the <span class="math inline">\(\exp\left(-t\right)\)</span> part. Every even <span class="math inline">\(h\)</span>, the ACF is equal to <span class="math inline">\(0\)</span> because of the <span class="math inline">\(\cos(2\pi t)\)</span> part.</p>
+</div>
+<div id="exercise-1.23" class="section level2" number="2.23">
+<h2><span class="header-section-number">2.23</span> Exercise 1.23</h2>
+<p>Consider the model
+<span class="math display">\[x_t = 2\cos\left(2\pi \frac{t + 15}{50}\right) + w_t,\]</span>
+for <span class="math inline">\(t = 1, \dots, 500\)</span>, <span class="math inline">\(\{w_t\}\)</span> is a white noise with <span class="math inline">\(\sigma_w^2 = 1\)</span>.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb31-1"><a href="characteristics-of-time-series.html#cb31-1"></a><span class="kw">function</span> signal_c(l)</span>
+<span id="cb31-2"><a href="characteristics-of-time-series.html#cb31-2"></a>    <span class="kw">return</span> [<span class="fl">2</span> <span class="op">*</span> cos(<span class="fl">2</span> <span class="op">*</span> <span class="cn">pi</span> <span class="op">*</span> (t <span class="op">+</span> <span class="fl">15</span>) <span class="op">/</span> <span class="fl">50</span>) <span class="kw">for</span> t <span class="kw">in</span> l]</span>
+<span id="cb31-3"><a href="characteristics-of-time-series.html#cb31-3"></a><span class="kw">end</span></span>
+<span id="cb31-4"><a href="characteristics-of-time-series.html#cb31-4"></a></span>
+<span id="cb31-5"><a href="characteristics-of-time-series.html#cb31-5"></a><span class="kw">function</span> signal_plus_noise_c(l)</span>
+<span id="cb31-6"><a href="characteristics-of-time-series.html#cb31-6"></a>    w <span class="op">=</span> rand(Normal()<span class="op">,</span> length(l))</span>
+<span id="cb31-7"><a href="characteristics-of-time-series.html#cb31-7"></a>    <span class="kw">return</span> signal_c(l) <span class="op">+</span> w</span>
+<span id="cb31-8"><a href="characteristics-of-time-series.html#cb31-8"></a><span class="kw">end</span></span></code></pre></div>
+<pre><code>signal_plus_noise_c (generic function with 1 method)</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb33-1"><a href="characteristics-of-time-series.html#cb33-1"></a>x <span class="op">=</span> signal_plus_noise_c(<span class="fl">1</span><span class="op">:</span><span class="fl">500</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb34-1"><a href="characteristics-of-time-series.html#cb34-1"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb34-2"><a href="characteristics-of-time-series.html#cb34-2"></a>plot(<span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">,</span> x)</span>
+<span id="cb34-3"><a href="characteristics-of-time-series.html#cb34-3"></a>xlabel(L<span class="st">&quot;$t$&quot;</span>)</span>
+<span id="cb34-4"><a href="characteristics-of-time-series.html#cb34-4"></a>ylabel(L<span class="st">&quot;$x_t$&quot;</span>)</span>
+<span id="cb34-5"><a href="characteristics-of-time-series.html#cb34-5"></a>title(L<span class="st">&quot;x_t = s_t + w_t&quot;</span>)</span>
+<span id="cb34-6"><a href="characteristics-of-time-series.html#cb34-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_66_0.png" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb35-1"><a href="characteristics-of-time-series.html#cb35-1"></a><span class="co"># Plot the ACF</span></span>
+<span id="cb35-2"><a href="characteristics-of-time-series.html#cb35-2"></a>figure(figsize<span class="op">=</span>(<span class="fl">15</span><span class="op">,</span> <span class="fl">5</span>))</span>
+<span id="cb35-3"><a href="characteristics-of-time-series.html#cb35-3"></a>stem(<span class="fl">0</span><span class="op">:</span><span class="fl">100</span><span class="op">,</span> autocor(x<span class="op">,</span> <span class="fl">0</span><span class="op">:</span><span class="fl">100</span>)<span class="op">,</span> use_line_collection<span class="op">=</span><span class="ex">true</span>)</span>
+<span id="cb35-4"><a href="characteristics-of-time-series.html#cb35-4"></a>xlabel(L<span class="st">&quot;$h$&quot;</span>)</span>
+<span id="cb35-5"><a href="characteristics-of-time-series.html#cb35-5"></a>title(<span class="st">&quot;Autocorrelation function&quot;</span>)</span>
+<span id="cb35-6"><a href="characteristics-of-time-series.html#cb35-6"></a>show()</span></code></pre></div>
+<p><img src="figures/01-characteristics-time-series/output_67_0.png" /></p>
+<p>We see the periodic components of the serie in the ACF.</p>
+</div>
+<div id="exercise-1.24" class="section level2" number="2.24">
+<h2><span class="header-section-number">2.24</span> Exercise 1.24</h2>
+<p>Let <span class="math inline">\(X\)</span> be a latent variable representing the action of tossing a fair coin. We have that:
+<span class="math display">\[\mathbb{P}(X = head) = \mathbb{P}(X = tail) = 0.5.\]</span></p>
+<p>Let <span class="math inline">\(x_t\)</span> be a time serie, such that <span class="math inline">\(x_t = 1\)</span> if <span class="math inline">\(X = head\)</span> and <span class="math inline">\(x_t = -1\)</span> if <span class="math inline">\(X = tail\)</span>. Then, we construct <span class="math inline">\(y_t\)</span> as
+<span class="math display">\[y_t = 5 + x_t - 0.7x_{t-1}.\]</span></p>
+<p>The moment of <span class="math inline">\(X\)</span> are:
+<span class="math display">\[\begin{align*}
+\mathbb{E}(X) &amp;= \mathbb{P}(X = head) \times 1 + \mathbb{P}(X = tail) \times (-1) = 0 \\
+Var(X) &amp;= \mathbb{E}(X^2) = \mathbb{P}(X = head) \times 1^2 + \mathbb{P}(X = tail) \times (-1)^2 = 1 \\
+\end{align*}\]</span></p>
+<p>The autocovariance function of <span class="math inline">\(y_t\)</span> is
+<span class="math display">\[\begin{align*}
+\gamma_y(h) &amp;= Cov(5 + x_{t+h} - 0.7x_{t+h-1}, 5 + x_t - 0.7x_{t-1}) \\
+            &amp;= Cov(x_{t+h}, x_t) - 0.7Cov(x_{t+h}, x_{t-1}) - 0.7Cov(x_{t+h-1}, x_t) + 0.7^2Cov(x_{t+h-1}, x_{t-1}) \\
+            &amp;= \left\{
+                \begin{array}{l l} 
+                    1 + 0.7^2 &amp;\text{if} h = 0 \\ 
+                    -0.7 &amp;\text{if} h = 1 \\
+                    0 &amp;\text{else}
+                \end{array}
+               \right.
+\end{align*}\]</span></p>
+<p>Finally, we have that
+<span class="math display">\[\rho_y(1) = \frac{-0.7}{1 + 0.7^2} \quad\text{and}\quad \rho_y(h) = 0, \quad\text{if}\quad h &gt; 1.\]</span></p>
+</div>
+<div id="exercise-1.25" class="section level2" number="2.25">
+<h2><span class="header-section-number">2.25</span> Exercise 1.25</h2>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>Let show that the autocovariance function <span class="math inline">\(\gamma(h)\)</span> of any stationary time series <span class="math inline">\(x_t\)</span> is non-negative definite function.</p>
+<p>Let <span class="math inline">\(a = (a_1, \dots, a_n)^\top \in \mathbb{R}^n\)</span>, <span class="math inline">\(t = (t_1, \dots, t_n)^\top \in \mathbb{Z}^n\)</span> and <span class="math inline">\(Z_t = (X_{t_1} - \mathbb{E}(X_{t_1}), \dots, X_{t_n} - \mathbb{E}(X_{t_n}))\)</span>.
+Then,
+<span class="math display">\[\begin{align*}
+0 &amp;\leq Var(a^\top Z_t) \\
+  &amp;= a^\top \mathbb{E}(Z_tZ_t^\top)a \\
+  &amp;= a^\top \Gamma_n a \\
+  &amp;= \sum_{i = 1}^n \sum_{j=1}^n a_i \gamma(t_i - t_j) a_j
+\end{align*}\]</span>
+where <span class="math inline">\(\Gamma_n\)</span> is the covariance matrix of <span class="math inline">\((X_{t_1}, \dots, X_{t_n})\)</span>.</p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>Assume, without loss of generality, that <span class="math inline">\(\bar{x} = 0\)</span>. Let <span class="math inline">\(x_t = 0\)</span> for <span class="math inline">\(t &lt; 1\)</span> or <span class="math inline">\(t &gt; n\)</span> and define the column vector <span class="math inline">\(X_i = (x_{i+1}, \dots, x_{i+n})^\top, -n &lt; i &lt; n\)</span>. Then
+<span class="math display">\[n\Gamma_n = \sum_{i = 1 - n}^{n - 1}X_iX_i^\top,\]</span>
+and <span class="math inline">\(a^\top X_iX_i^\top a = (X_i^\top a)^\top(X_i^\top)a \geq 0\)</span> for any column vector <span class="math inline">\(a\)</span>.</p>
+<p>Thus, <span class="math inline">\(\Gamma_n\)</span> is the sum of nonnegative definite matrices and consequently must also be nonnegative definite. It follows that <span class="math inline">\(\hat{\gamma}(h)\)</span> is nonnegative definite for any <span class="math inline">\(h &gt; 0\)</span>.</p>
+</div>
+<div id="exercise-1.26" class="section level2" number="2.26">
+<h2><span class="header-section-number">2.26</span> Exercise 1.26</h2>
+<p>Consider a collection of time series <span class="math inline">\(x_{1t}, x_{2t}, \dots, x_{Nt}\)</span> that are observing some common signal <span class="math inline">\(\mu_t\)</span> observed in noise processes <span class="math inline">\(e_{1t}, e_{2t}, \dots, e_{Nt}\)</span>, with a model for the <span class="math inline">\(j\)</span>th observed series given by
+<span class="math display">\[x_{jt} = \mu_t + e_{jt}.\]</span></p>
+<p>Suppose the noise series have zero means and are uncorrelated for different <span class="math inline">\(j\)</span>. The common autocovariance functions of all series are given by <span class="math inline">\(\gamma_e(s, t)\)</span>. Define the sample mean
+<span class="math display">\[\bar{x}_t = \frac{1}{N}\sum_{j=1}^N x_{jt}.\]</span></p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p><span class="math display">\[\mathbb{E}(\bar{x}_t) = \mathbb{E}\left(\frac{1}{N}\sum_{j=1}^N x_{jt}\right) = \mathbb{E}\left(\frac{1}{N}\sum_{j=1}^N (\mu_t + e_{jt})\right) = \frac{1}{N}\sum_{j=1}^N \mu_t = \mu_t\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}\left((\bar{x}_t - \mu_t)^2\right) &amp;= \mathbb{E}\left(\left(\frac{1}{N}\sum_{j=1}^N (\mu_t + e_{jt}) - \mu_t\right)^2\right) \\
+    &amp;= \mathbb{E}\left(\left(\frac{1}{N}\sum_{j=1}^N e_{jt}\right)^2\right) \\
+    &amp;= \frac{1}{N^2}\mathbb{E}\left(\left(\sum_{j=1}^N e_{jt}\right)^2\right) \\
+    &amp;= \frac{1}{N}\gamma_e(t, t), \quad\text{because the noise series are uncorrelated}.
+\end{align*}\]</span></p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p>The common signal may be estimated using <span class="math inline">\(\bar{x}_t\)</span>, because the square difference between <span class="math inline">\(\bar{x}_t\)</span> and the common signal goes to zero (in mean) as <span class="math inline">\(N\)</span> goes to infinity.</p>
+</div>
+<div id="exercise-1.27" class="section level2" number="2.27">
+<h2><span class="header-section-number">2.27</span> Exercise 1.27</h2>
+<p>Let <span class="math inline">\(x_s, s = (s_1, s_2)\)</span> be a spatial process. For <span class="math inline">\(s_1, s_2 = 0, \pm 1, \pm 2, \dots\)</span>, defined the variogram
+<span class="math display">\[V_x(h) = \frac{1}{2}\mathbb{E}((x_{s+h} - x_s)^2)\]</span>
+where <span class="math inline">\(h = (h_1, h_2)\)</span>, for <span class="math inline">\(h_1, h_2 = 0, \pm 1, \pm 2, \dots\)</span>.</p>
+<p>We have that
+<span class="math display">\[\begin{align*}
+V_x(h) &amp;= \frac{1}{2}\mathbb{E}((x_{s+h} - x_s)^2) \\
+       &amp;= \frac{1}{2}\mathbb{E}(((x_{s+h} - \mu) - (x_s - \mu))^2) \\
+       &amp;= \frac{1}{2}\mathbb{E}((x_{s+h} - \mu)^2 + (x_s - \mu)^2 - 2(x_{s+h} - \mu)(x_s - \mu)) \\
+       &amp;= \frac{1}{2}\left(\mathbb{E}((x_{s+h} - \mu)^2) + \mathbb{E}((x_s - \mu)^2) - 2\mathbb{E}((x_{s+h} - \mu)(x_s - \mu))\right) \\
+       &amp;= \gamma(0) - \gamma(h)
+\end{align*}\]</span></p>
+</div>
+<div id="exercise-1.28" class="section level2" number="2.28">
+<h2><span class="header-section-number">2.28</span> Exercise 1.28</h2>
+<p>Suppose <span class="math inline">\(x_t = \beta_0 + \beta_1t\)</span>, where <span class="math inline">\(\beta_0\)</span> ad <span class="math inline">\(\beta_1\)</span> are constants. We will prove that, as <span class="math inline">\(n \rightarrow \infty\)</span>, <span class="math inline">\(\hat{\rho}_x(h) \rightarrow 1\)</span>, for fixed <span class="math inline">\(h\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+\bar{x} &amp;= \frac{1}{n}\sum_{t = 1}^n (\beta_0 + \beta_1t) = \beta_0 + \beta_1\frac{n(n+1)}{2} \\
+\hat{\rho}_x(h) &amp;= \frac{\sum_{t=1}^{n-h}(x_{t+h} - \bar{x})(x_t - \bar{x})}{\sum_{t=1}^{n}(x_{t} - \bar{x})(x_t - \bar{x})} \\
+\end{align*}\]</span></p>
+<p>Then,
+<span class="math display">\[\begin{align*}
+\sum_{t=1}^{n}(x_{t} - \bar{x})(x_t - \bar{x}) &amp;= \beta_1^2\sum_{t=1}^n\left(t - \frac{n(n+1)}{2}\right)^2 \\
+    &amp;= \beta_1^2\sum_{t=1}^n\left(t^2 - 2t\frac{n(n+1)}{4} + \frac{n^2(n+1)^2}{4}\right) \\
+    &amp;= \beta_1^2\left(\frac{n(n+1)(2n+1)}{6} - \frac{n^2(n+1)^2}{2} + \frac{n^3(n+1)^2}{4}\right) \\
+    &amp;= \frac{\beta_1^2}{12}\left(2n(n+1)(2n+1) - 6n^2(n+1)^2 + 3n^3(n+1)^2\right) \\
+    &amp;= \mathcal{O}(n^5)
+\end{align*}\]</span></p>
+<p><span class="math display">\[\begin{align*}
+\sum_{t=1}^{n-h}(x_{t+h} - \bar{x})(x_t - \bar{x}) &amp;= \beta_1^2\sum_{t=1}^n\left(t + h - \frac{n(n+1)}{2}\right)\left(t - \frac{n(n+1)}{2}\right) \\
+    &amp;= \beta_1^2\sum_{t=1}^n\left(t^2 - tn(n+1) + \frac{n^2(n+1)^2}{4} + ht - h\frac{n(n+1)}{2}\right) \\
+    &amp;= \beta_1^2\left(\frac{n(n+1)(2n+1)}{6} - \frac{n^2(n+1)^2}{2} + \frac{n^3(n+1)^2}{4} + h\frac{n(n+1)}{4} - h\frac{n^2(n+1)^2}{4}\right) \\
+    &amp;= \frac{\beta_1^2}{12}\left(2n(n+1)(2n+1) - 6n^2(n+1)^2 + 3n^3(n+1)^2 + 6hn(n+1)(1-n)\right) \\
+    &amp;= \mathcal{O}(n^5)
+\end{align*}\]</span></p>
+<p>Finally, <span class="math inline">\(\hat{\rho}_x(h) = \mathcal{O}(1)\)</span>, as <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
+</div>
+<div id="exercise-1.29" class="section level2" number="2.29">
+<h2><span class="header-section-number">2.29</span> Exercise 1.29</h2>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>Suppose <span class="math inline">\(x_t\)</span> is a weakly stationary time series with mean zero and with absolutely summable autocovariance function, <span class="math inline">\(\gamma(h)\)</span>, such that
+<span class="math display">\[\sum_{h=-\infty}^{\infty} \gamma(h) = 0\]</span></p>
+<p>The variance of the sample mean <span class="math inline">\(\bar{x}\)</span> is (see <em>e.g.</em> J. Hamilton,Time Series Analysis, 1994, p.187-188),
+<span class="math display">\[Var(\bar{x}) = \frac{1}{n^2}\sum_{h = -n}^n (n - \lvert h \rvert)\gamma(h) = \frac{1}{n}\sum_{h = -n}^n \frac{n - \lvert h \rvert}{n}\gamma(h).\]</span></p>
+<p>And then,
+<span class="math display">\[nVar(\bar{x}) = \sum_{h = -n}^n \frac{n - \lvert h \rvert}{n}\gamma(h) \underset{n \rightarrow \infty}{\longrightarrow}  \sum_{h = -\infty}^\infty \gamma(h) = 0,\]</span>
+by dominated convergence, because <span class="math inline">\(\lvert (1 - \lvert h\rvert / n)\gamma(h)\rvert \leq \lvert\gamma(h)\rvert\)</span> and <span class="math inline">\((1 - \lvert h\rvert / n)\gamma(h) \rightarrow \gamma(h)\)</span>.</p>
+<p>Finally, <span class="math inline">\(\sqrt{n}\bar{x} \overset{ms}{\rightarrow} 0\)</span>, which implies <span class="math inline">\(\sqrt{n}\bar{x} \overset{p}{\rightarrow} 0\)</span>.</p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>I think that the only process that satisfies the previous assumption in a constant process with mean <span class="math inline">\(0\)</span>, because, in order to have <span class="math inline">\(\sum_{h = -\infty}^\infty \gamma(h) = 0\)</span>, the variance of the process should be <span class="math inline">\(0\)</span> and only deterministic processes have null variance. Moreover, it should have zero mean. And, for a deterministic process, only constant ones have mean that does not depend on time.</p>
+</div>
+<div id="exercise-1.30" class="section level2" number="2.30">
+<h2><span class="header-section-number">2.30</span> Exercise 1.30</h2>
+<p>Let <span class="math inline">\(x_t\)</span> be a linear process of the form
+<span class="math display">\[x_t = \mu_x + \sum_{j = -\infty}^{\infty} \psi_j w_{t-j}\]</span>
+where <span class="math inline">\(w_t\)</span> is a white noise process with variance <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(\sum \lvert \psi_j \rvert &lt; \infty\)</span>.</p>
+<p>Define</p>
+<p><span class="math display">\[\begin{align*}
+\hat \gamma \left( h \right) &amp;= \frac{1}{n}\sum_{t = 1}^{n - h} {\left( x_t - \bar x \right)\left( x_{t + h} - \bar x \right)}\\
+\tilde{\gamma} \left( h \right) &amp;= \frac{1}{n}\sum_{t = 1}^{n} {\left( x_t - \mu_x \right)\left( x_{t + h} - \mu_x \right)}
+\end{align*}\]</span></p>
+<p>We want to show that
+<span class="math display">\[n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right) = \mathcal{o}_p(1) \Leftrightarrow \mathbb{P}\left(\left\lvert n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right)\right\rvert &gt; \epsilon \right) \longrightarrow 0, \forall \epsilon &gt; 0.\]</span></p>
+<p>Using the Markov inequality, we have that:
+<span class="math display">\[\forall \epsilon &gt; 0, \mathbb{P}\left(\left\lvert n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right)\right\rvert &gt; \epsilon\right) \leq \frac{1}{\epsilon}\mathbb{E}\left(\left\lvert n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right)\right\rvert\right)\]</span></p>
+<p>Then,
+<span class="math display">\[\begin{align*}
+n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right) &amp;= n^{\frac{1}{2}}\left(\frac{1}{n}\sum_{t = 1}^{n} {\left( x_t - \mu_x \right)\left( x_{t + h} - \mu_x \right)} - \frac{1}{n}\sum_{t = 1}^{n - h} {\left( x_t - \bar x \right)\left( x_{t + h} - \bar x \right)}\right) \\
+    &amp;= \frac{1}{n^{\frac{1}{2}}}\left(\sum_{t = n-h+1}^{n} {\left( x_t - \mu_x \right)\left( x_{t + h} - \mu_x \right)} + \sum_{t = 1}^{n - h} {\left( x_t - \mu_x \right)\left( x_{t + h} - \mu_x \right) - \left( x_t - \bar x \right)\left( x_{t + h} - \bar x \right)}\right)
+\end{align*}\]</span></p>
+<p>Considering only the second term,
+<span class="math display">\[\begin{align*}
+\sum_{t = 1}^{n - h} {\left( x_t - \mu_x \right)\left( x_{t + h} - \mu_x \right) - \left( x_t - \bar x \right)\left( x_{t + h} - \bar x \right)} &amp;= \sum_{t = 1}^{n - h} \left({x_t  (\bar x - \mu_x) + x_{t + h} (\bar x - \mu_x)  - \left( \bar x - \mu_x\right)\left( \bar x + \mu_x\right)}\right)\\
+    &amp;= \left(\bar x - \mu_x\right)\sum_{t = 1}^{n - h} \left({x_t + x_{t + h} - \bar x - \mu_x}\right) \\
+    &amp;= \left(\bar x - \mu_x\right)\left(\sum_{t = 1}^{n - h} x_t + \sum_{t = 1+h}^{n} x_{t} - (n-h)\bar x - (n-h)\mu_x\right) \\
+    &amp;= \left(\bar x - \mu_x\right)\left(\sum_{t = 1+h}^{n - h} x_t + \sum_{t = 1}^{n} x_{t} - (n-h)\bar x - (n-h)\mu_x\right) \\
+    &amp;= \left(\bar x - \mu_x\right)\left(\sum_{t = 1+h}^{n - h} x_t + h\bar x - (n-h)\mu_x\right) \\
+    &amp;= \left(\bar x - \mu_x\right)\left(\sum_{t = 1+h}^{n - h} (x_t - \mu_x) + h(\bar x - \mu_x)\right) \\
+    &amp;= \left(\bar x - \mu_x\right)\sum_{t = 1+h}^{n - h} (x_t - \mu_x) + h(\bar x - \mu_x)^2 \\
+\end{align*}\]</span></p>
+<p>Returning to the previous equation, we have that
+<span class="math display">\[n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right) = \frac{1}{n^{\frac{1}{2}}}\sum_{t = n-h+1}^{n} {\left( x_t - \mu_x \right)\left( x_{t + h} - \mu_x \right)} + \frac{1}{n^{\frac{1}{2}}}\left(\bar x - \mu_x\right)\sum_{t = 1+h}^{n - h} (x_t - \mu_x) + \frac{h}{n^{\frac{1}{2}}}(\bar x - \mu_x)^2 \]</span></p>
+<p>We continue using the triangle inequality:
+<span class="math display">\[\mathbb{E}\left(\left\lvert n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right)\right\rvert\right) \leq \frac{1}{n^{\frac{1}{2}}}\sum_{t = n-h+1}^{n} \mathbb{E}{\left\lvert( x_t - \mu_x )( x_{t + h} - \mu_x )\right\rvert} + \frac{1}{n^{\frac{1}{2}}}\mathbb{E}\left[\left\lvert\left(\bar x - \mu_x\right)\sum_{t = 1+h}^{n - h} (x_t - \mu_x)\right\rvert\right] + \frac{h}{n^{\frac{1}{2}}}\mathbb{E}(\bar x - \mu_x)^2.\]</span></p>
+<p>For the first term, using Cauchy-Schwarz inequality, we have:
+<span class="math display">\[\mathbb{E}{\left\lvert( x_t - \mu_x )( x_{t + h} - \mu_x )\right\rvert} \leq \mathbb{E}\left(\left\lvert( x_t - \mu_x )\right\rvert^2\right)^{1/2} \mathbb{E}\left(\left\lvert( x_{t + h} - \mu_x )\right\rvert^2\right)^{1/2} = \sigma^2\sum_{j=-\infty}^{\infty} \psi_j^2 \leq \sigma^2\left(\sum_{j=-\infty}^{\infty} \lvert\psi_j\rvert\right)^2&lt; \infty\]</span></p>
+<p>For the last term, using equation (A.46)-(A-47), we have:
+<span class="math display">\[\mathbb{E}(\bar x - \mu_x)^2 = \frac{\sigma^2}{n}\left(\sum_{j=-\infty}^{\infty} \psi_j\right)^2 \leq \frac{\sigma^2}{n}\left(\sum_{j=-\infty}^{\infty} \lvert\psi_j\rvert\right)^2 &lt; \infty\]</span></p>
+<p>Finally, for the middle term, again using Cauchy-Schwarz inequality, we have:
+<span class="math display">\[\begin{align*}
+\mathbb{E}\left[\left\lvert\left(\bar x - \mu_x\right)\sum_{t = 1+h}^{n - h} (x_t - \mu_x)\right\rvert\right] &amp;\leq \mathbb{E}\left[\left\lvert\left(\bar x - \mu_x\right)\right\rvert^2\right]^{1/2}\mathbb{E}\left[\left\lvert\sum_{t = 1+h}^{n - h} (x_t - \mu_x)\right\rvert^2\right]^{1/2} \\
+&amp;\leq \frac{\sigma}{\sqrt{n}}\left(\sum_{j=-\infty}^{\infty} \lvert\psi_j\rvert\right)\left[\sum_{t = 1+h}^{n - h} \mathbb{E}(x_t - \mu_x)^2\right]^{1/2} \\
+&amp;\leq \frac{\sigma}{\sqrt{n}}\left(\sum_{j=-\infty}^{\infty} \lvert\psi_j\rvert\right)\left[\sum_{t = 1+h}^{n - h} Var(x_t)\right]^{1/2} \\
+&amp;\leq \frac{\sigma}{\sqrt{n}}\left(\sum_{j=-\infty}^{\infty} \lvert\psi_j\rvert\right)(n-2h)^{1/2}\sigma\left(\sum_{j=-\infty}^{\infty} \psi_j^2\right)^{1/2} \\
+&amp;\leq \sqrt{\frac{n-2h}{n}}\sigma^2\left(\sum_{j=-\infty}^{\infty} \lvert\psi_j\rvert\right)^2 &lt; \infty
+\end{align*}\]</span></p>
+<p>To conclude the proof, we write
+<span class="math display">\[\mathbb{E}\left(\left\lvert n^{\frac{1}{2}}\left(\tilde{\gamma} \left( h \right) - \hat \gamma \left( h \right)\right)\right\rvert\right) \leq \frac{nh + \sqrt{n(n - 2h)} + h}{n\sqrt{n}}\sigma^2\left(\sum_{j=-\infty}^{\infty} \lvert\psi_j\rvert\right)^2 \longrightarrow 0.\]</span></p>
+</div>
+<div id="exercise-1.31" class="section level2" number="2.31">
+<h2><span class="header-section-number">2.31</span> Exercise 1.31</h2>
+<p>Let <span class="math inline">\(x_t\)</span> be a linear process of the form
+<span class="math display">\[x_t = \sum_{j=0}^\infty \phi^j w_{t-j}\]</span>
+where <span class="math inline">\(\{w_t\}\)</span> as finite fourth moment and <span class="math inline">\(\lvert \phi \rvert &lt; 1\)</span>. In particular, <span class="math inline">\(x_t\)</span> is a process of the form
+<span class="math display">\[x_t = \sum_{j=0}^\infty \psi_j w_{t-j} \quad\text{where}\quad \psi_j = \left\{\begin{array}{r l} \phi^j, &amp;\quad j \geq 0 \\ 0, &amp;\quad j &lt; 0  \end{array}\right.\]</span>
+Moreover, <span class="math inline">\(x_t\)</span> may be written under an AR(1) form
+<span class="math display">\[x_t = \phi X_{t-1} + w_t.\]</span></p>
+<p>The autocovariance function of an AR(1) process is given by
+<span class="math display">\[\gamma(h) = \sigma^2\sum_{j=0}^\infty \phi^j \phi^{j+h} = \sigma^2 \phi^h\sum_{j=0}^\infty \phi^{2j} = \frac{\sigma^2\phi^h}{1 - \phi^2}.\]</span>
+And then, the variance of an AR(1) process is
+<span class="math display">\[\gamma(0) = \frac{\sigma^2}{1 - \phi^2},\]</span>
+and its autocorrelation function is
+<span class="math display">\[\rho(h) = \frac{\gamma(h)}{\gamma(0)} = \phi^h.\]</span></p>
+<p>As, <span class="math inline">\(x_t\)</span> satifies the assumptions of the theorem A.7, we have the following result:
+<span class="math display">\[\widehat{\rho}(1) \sim A\mathcal{N}(\rho(1), n^{-1}W),\]</span>
+where <span class="math inline">\(W = \sum_{u=1}^\infty \left(\rho(u+1) + \rho(u-1) - 2\rho(1)\rho(u)\right)^2.\)</span></p>
+<p>Let’s compute <span class="math inline">\(W\)</span>:
+<span class="math display">\[\begin{align*}
+W &amp;= \sum_{u=1}^\infty \left(\rho(u+1) + \rho(u-1) - 2\rho(1)\rho(u)\right)^2 \\
+    &amp;= \sum_{u=1}^\infty \left(\phi^{u+1} + \phi^{u-1} - 2\phi^1\phi^u\right)^2 \\
+    &amp;= \sum_{u=1}^\infty \left(\phi^{u-1} - \phi^{u+1}\right)^2 \\
+    &amp;= \sum_{u=1}^\infty \left(\phi^{2(u-1)} + \phi^{2(u+1)} - 2\phi^{(u+1) + (u+1)}\right)^2 \\
+    &amp;= \sum_{u=1}^\infty \left(\phi^{2u}\left(\phi^2 + \phi^{-2} - 2\right)\right) \\
+    &amp;= \left(\phi^2 + \phi^{-2} - 2\right)\left(\sum_{u=0}^\infty \phi^{2u} - 1\right) \\
+    &amp;= \left(\phi^2 + \phi^{-2} - 2\right)\left(\frac{1}{1 - \phi^2} - 1\right) \\
+    &amp;= \frac{\phi^4 - 2\phi^2 + 1}{1 - \phi^2} \\
+    &amp;= 1 - \phi^2 \\
+    &amp;= 1 - \rho(1)^2
+\end{align*}\]</span></p>
+<p>Finally, we have the following convergence in distribution:
+<span class="math display">\[\sqrt{n}\frac{\widehat{\rho}(1) - \rho(1)}{\sqrt{1 - \rho(1)^2}} \xrightarrow{d} \mathcal{N}(0, 1).\]</span></p>
+<p>A confidence for <span class="math inline">\(\rho(1)\)</span> (and so for <span class="math inline">\(\phi\)</span> is given by
+<span class="math display">\[\left[\widehat{\rho}(1) - \mathcal{t}_{0.975, n-1}\sqrt{\frac{1 - \widehat{\rho}^2(1)}{n}}; \widehat{\rho}(1) + \mathcal{t}_{0.975, n-1}\sqrt{\frac{1 - \widehat{\rho}^2(1)}{n}}\right] = [0.49; 0.79],\]</span>
+where <span class="math inline">\(\mathcal{t}_{0.975, n-1}\)</span> is the quantile of the student distribution at confidence level <span class="math inline">\(97.5\%\)</span> and <span class="math inline">\(n-1\)</span> degree of freedom. We use the student distribution, because we had to estimate the standard deviation of <span class="math inline">\(\rho(1)\)</span>.</p>
+</div>
+<div id="exercise-1.32" class="section level2" number="2.32">
+<h2><span class="header-section-number">2.32</span> Exercise 1.32</h2>
+<p>Let <span class="math inline">\(\{x_t, t = 0, \pm 1, \pm 2, \dots\}\)</span> be iid<span class="math inline">\((0, \sigma^2)\)</span>.</p>
+<ul>
+<li><em>Question (a)</em></li>
+</ul>
+<p>Let <span class="math inline">\(h \geq 1\)</span>, <span class="math inline">\(k \geq 1\)</span> and <span class="math inline">\(s \neq t\)</span>, then
+<span class="math display">\[
+Cov(x_tx_{t+h}, x_sx_{s+k}) = \mathbb{E}(x_tx_{t+h}x_sx_{s+k}) + \mathbb{E}(x_tx_{t+h})\mathbb{E}(x_sx_{s+k}) = 0,
+\]</span></p>
+<ul>
+<li><em>Question (b)</em></li>
+</ul>
+<p>Let <span class="math inline">\(c = (c_1, \dots, c_h)^\top \in \mathbb{R}^h\)</span>, and <span class="math inline">\(X_n = (\sum x_tx_{t+1}, \dots, \sum x_tx_{t+h})^\top\)</span>. We aim to compute the moments of <span class="math inline">\(c^\top X_n\)</span></p>
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}(c^\top X_n) &amp;= \sum_{i = 1}^h c_i \sum_{t=1}^n \mathbb{E}(x_t x_{t+i}) = 0 \\
+Var(c^\top X_n) &amp;= \sum_{i = 1}^h c_i^2 \sum_{t=1}^n Var(x_t x_{t+i}) = n\sigma^4 \sum_{i=1}^h c_i^2
+\end{align*}\]</span>
+because, we have for two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:
+<span class="math display">\[Var(XY) = \mathbb{E}(X^{2}Y^{2}) - \mathbb{E}(XY)^{2} = Cov(X^{2}, Y^{2}) + [Var(X) + \mathbb{E}(X)^2] \times [Var(Y) + \mathbb{E}(Y)^2] - [ Cov(X,Y) + \mathbb{E}(X)\mathbb{E}(Y) ]^{2}\]</span></p>
+<p>So, we have the following result:
+<span class="math display">\[\sigma^{-2}n^{-1/2}c^\top X_n \xrightarrow{d} c^\top z, \quad\text{where}\quad z = (z_1, \dots, z_h)^\top\]</span>
+with <span class="math inline">\(z_1, \dots, z_h\)</span> are iid <span class="math inline">\(\mathcal{N}(0, 1)\)</span> random variables.</p>
+<p>Finally, using the Cramér-Wold device,
+<span class="math display">\[\sigma^{-2}n^{-1/2} X_n \xrightarrow{d} z\]</span></p>
+<ul>
+<li><em>Question (c)</em></li>
+</ul>
+<p>We would like to show that, for each <span class="math inline">\(h \geq 1\)</span>,
+<span class="math display">\[n^{-1/2}\left(\sum_{t=1}^{n} x_tx_{t+h} - \sum_{t=1}^{n-h}(x_t - \bar x)(x_{t+h} - \bar x)\right) \xrightarrow{p} 0, \quad\text{as}~ n \rightarrow \infty\]</span></p>
+<p>This is equivalent to show that
+<span class="math display">\[\mathbb{P}\left(\left\lvert n^{-1/2}\left(\sum_{t=1}^{n} x_tx_{t+h} - \sum_{t=1}^{n-h}(x_t - \bar x)(x_{t+h} - \bar x)\right)\right\rvert &gt; \epsilon\right) \xrightarrow[n \rightarrow \infty]{} 0, \forall \epsilon &gt; 0.\]</span></p>
+<p>Then, using the Markov inequality,
+<span class="math display">\[\begin{align*}
+\mathbb{P}\left(\left\lvert n^{-1/2}\left(\sum_{t=1}^{n} x_tx_{t+h} - \sum_{t=1}^{n-h}(x_t - \bar x)(x_{t+h} - \bar x)\right)\right\rvert &gt; \epsilon\right) &amp;\leq \frac{1}{\epsilon}\mathbb{E}\left(\left\lvert n^{-1/2}\left(\sum_{t=1}^{n} x_tx_{t+h} - \sum_{t=1}^{n-h}(x_t - \bar x)(x_{t+h} - \bar x)\right)\right\rvert\right) \\
+    &amp;\leq \frac{1}{\epsilon\sqrt{n}}\mathbb{E}\left(\left\lvert \left(\sum_{t=n-h+1}^{n} x_tx_{t+h} + \bar x \sum_{t=1}^{n-h}(x_t + x_{t+h}) - (n-h)\bar x^2\right)\right\rvert\right) \\
+    &amp;\leq \frac{1}{\epsilon\sqrt{n}}
+    \mathbb{E}\left(\left\lvert\sum_{t=n-h+1}^{n} x_tx_{t+h}\right\rvert\right) + 
+    \mathbb{E}\left(\left\lvert\bar x \sum_{t=1}^{n-h}(x_t + x_{t+h})\right\rvert\right) + 
+    (n-h)\mathbb{E}\left(\bar x^2\right) \\
+\end{align*}\]</span></p>
+<p>First term:
+<span class="math display">\[
+\mathbb{E}\left(\left\lvert\sum_{t=n-h+1}^{n} x_tx_{t+h}\right\rvert\right) \leq \sum_{t=n-h+1}^{n}\mathbb{E}\left\lvert x_tx_{t+h}\right\rvert \leq \sum_{t=n-h+1}^{n}\mathbb{E}(x_t^2)^{1/2}\mathbb{E}(x_{t+h}^2)^{1/2} \leq h\sigma^2\]</span></p>
+<p>Last term:
+<span class="math display">\[\mathbb{E}\left(\bar x^2\right) = Var(\bar x^2) = \frac{1}{n^2}\sum_{t=1}^n Var(x_t) = \frac{\sigma^2}{n} \]</span></p>
+<p>Middle term:
+<span class="math display">\[\mathbb{E}\left(\left\lvert\bar x \sum_{t=1}^{n-h}(x_t + x_{t+h})\right\rvert\right) \leq 2\mathbb{E}\left(\left\lvert\bar x \sum_{t=1}^{n-h} x_t\right\rvert\right) \leq \mathbb{E}(\bar x^2)^{1/2}\mathbb{E}\left(\left\lvert\sum_{t=1}^{n-h} x_t\right\rvert^2\right)^{1/2} \leq \frac{2\sigma}{\sqrt{n}}\left(\sum_{t=1}^{n-h} \mathbb{E}(x_t^2)\right)^{1/2} \leq 2\sqrt{\frac{n - h}{n}}\sigma^2\]</span></p>
+<p>And finally,
+<span class="math display">\[\mathbb{P}\left(\left\lvert n^{-1/2}\left(\sum_{t=1}^{n} x_tx_{t+h} - \sum_{t=1}^{n-h}(x_t - \bar x)(x_{t+h} - \bar x)\right)\right\rvert &gt; \epsilon\right) \leq \frac{\sigma^2}{\epsilon}\frac{nh + 2\sqrt{n(n-h} + 1}{n\sqrt{n}} \xrightarrow[n \rightarrow \infty]{} 0.\]</span></p>
+<ul>
+<li><em>Question (d)</em></li>
+</ul>
+<p>Noting that <span class="math inline">\(n^{-1}\sum_{t=1}^n x_t^2 \xrightarrow{p} \sigma^2\)</span>, and let <span class="math inline">\(\widehat\rho = (\widehat\rho(1), \dots, \widehat\rho(h))^\top\)</span>. We conclude that
+<span class="math display">\[n^{1/2}\widehat\rho \xrightarrow{p} \sigma^{-2}n^{-1/2}X_n \xrightarrow{d} z \Longleftrightarrow n^{1/2}\widehat\rho \xrightarrow{d} z.\]</span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
