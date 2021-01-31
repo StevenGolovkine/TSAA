@@ -1,5 +1,6 @@
 # Time Series Regression and Exploratory Data Analysis
 
+## Exercises
 
 ```julia
 # Load packages
@@ -18,7 +19,7 @@ using TimeSeries
 matplotlib.rcParams["text.usetex"] = true;
 ```
 
-## Exercise 2.1
+### Exercise 2.1
 
 
 ```julia
@@ -38,7 +39,7 @@ show()
 ```
 
 
-![png](output_4_0.png)
+![](./figures/02-time-series-regression/output_4_0.png)
 
 
 * *Question (a)*
@@ -147,7 +148,7 @@ show()
 ```
 
 
-![png](output_16_0.png)
+![](./figures/02-time-series-regression/output_16_0.png)
 
 
 
@@ -161,12 +162,12 @@ show()
 ```
 
 
-![png](output_17_0.png)
+![](./figures/02-time-series-regression/output_17_0.png)
 
 
 The model fits quite well the data. The residuals do not look exactly white, we still see some pattern in the previous graph. However, the approximation is correct.
 
-## Exercise 2.2
+### Exercise 2.2
 
 
 ```julia
@@ -237,7 +238,7 @@ show()
 ```
 
 
-![png](output_26_0.png)
+![](./figures/02-time-series-regression/output_26_0.png)
 
 
 * Question (b)
@@ -264,7 +265,7 @@ show()
 ```
 
 
-![png](output_28_0.png)
+![](./figures/02-time-series-regression/output_28_0.png)
 
 
 
@@ -295,7 +296,7 @@ cor(mort[5:end], part4)
 
 $M_t$ and $P_{t-4}$ have a higher correlation than $M_t$ and $P_t$. So, using $P_{t-4}$ instead of $P_t$ in the linear model should results to better fit.
 
-## Exercise 2.3
+### Exercise 2.3
 
 * Question (a) - Random walk
 
@@ -320,7 +321,7 @@ show()
 ```
 
 
-![png](output_34_0.png)
+![](./figures/02-time-series-regression/output_34_0.png)
 
 
 * Question (b) - Linear trend plus noise
@@ -346,14 +347,14 @@ show()
 ```
 
 
-![png](output_36_0.png)
+![](./figures/02-time-series-regression/output_36_0.png)
 
 
 * Question (c)
 
 The assignement shows that we should be very careful in case of correlated errors (see random walks). The estimated mean function is thus bad estimated, and without multiple realizations of the process (functional data), the mean is hardly estimated. For non-correlated errors (linear trend), all is well, and the predicted mean curve lies close to the true one. Linear models assume non-correlated errors.
 
-## Exercise 2.4
+### Exercise 2.4
 
 Let $y = (y_1, \dots, y_n)$, $Z \in \mathbb{R}^{n \times k}$ and $\beta = \mathbb{R}^k$.
 Consider the Gaussian regression model:
@@ -376,7 +377,7 @@ I(\beta_1, \sigma_1; \beta_2, \sigma_2) &= \frac{1}{n}\mathbb{E}_1\left(\log(f(y
 &= \frac{1}{2}\left(\log\left(\frac{\sigma_2^2}{\sigma_1^2}\right) - 1 + \frac{\sigma_1^{2}}{\sigma_2^2} + \frac{(\beta_1 - \beta_2)^\top Z^\top Z (\beta_1 - \beta_2)}{n\sigma_2^2}\right)
 \end{align}
 
-## Exercise 2.5
+### Exercise 2.5
 
 Consider to find an unbiased estimator for $\mathbb{E}_1(I(\beta_1, \sigma_1^2; \widehat{\beta}, \widehat{\sigma}^2)).$
 
@@ -387,7 +388,7 @@ Consider to find an unbiased estimator for $\mathbb{E}_1(I(\beta_1, \sigma_1^2; 
 &= \frac{1}{2}\left(- \log(\sigma_1^2) + \mathbb{E}_1(\log(\widehat\sigma^2)) + \frac{n - k}{n - k - 2} - 1\right) \\
 \end{align}
 
-## Exercise 2.6
+### Exercise 2.6
 
 Consider a process consisting of a linear trend with an additive noise term consisting of independent random variables $w_t$ with zero means and variances $\sigma_w^2$, that is
 $$x_t = \beta_0 + \beta_1t + w_t,$$
@@ -418,11 +419,11 @@ and thus depends on $s$ and $t$  only through their difference $\lvert s - t \rv
 
 We replace $w_t$ by a general stationary process $y_t$, with mean $\mu_y$ and autocovariance function $\gamma_y(h)$. Clearly, the mean value of the process $\nabla x_t$ is still $\beta_1$ and does not depend on time $t$. The autocovariance is $\gamma(h) = 2\gamma_y(h) - \gamma_y(h + 1) - \gamma_y(h - 1)$. It depends only on $h$, so this process is also stationary.
 
-## Exercise 2.7
+### Exercise 2.7
 
 We consider the process $\nabla x_t = \delta + w_t + y_t - y_{t-1}$ where $w_t \sim \mathcal{N}(0, \sigma^2)$. Noting that $(w_t)_t$ and $(y_t - y_{t-1})_t$ are independant, and using the previous exercise, $\nabla x_t$ is a stationary process. 
 
-## Exercise 2.8
+### Exercise 2.8
 
 
 ```julia
@@ -443,7 +444,7 @@ show()
 ```
 
 
-![png](output_44_0.png)
+![](./figures/02-time-series-regression/output_44_0.png)
 
 
 
@@ -458,7 +459,7 @@ show()
 ```
 
 
-![png](output_45_0.png)
+![](./figures/02-time-series-regression/output_45_0.png)
 
 
 * *Question (a)*
@@ -483,7 +484,7 @@ show()
 ```
 
 
-![png](output_47_0.png)
+![](./figures/02-time-series-regression/output_47_0.png)
 
 
 We see that the serie exhibits heteroscedasticity thanks to the computation of the variance. The log-transformation stabilized a bit the variance within the data. Morover, the normality assumption is more reflected in the log-data.
@@ -506,7 +507,7 @@ show()
 ```
 
 
-![png](output_49_0.png)
+![](./figures/02-time-series-regression/output_49_0.png)
 
 
 The autocorrelation is still quite important until $h = 500$. Note that between $h = 100$ and $h = 350$, $y_t$ and $y_{t + h}$ are negatively correlated. The autocorrelation does not really belong to the $95\%$ CI (red dashd lines), and there is clearly not an exponential decay of the ACF. So, the series is not stationary.
@@ -529,7 +530,7 @@ show()
 ```
 
 
-![png](output_52_0.png)
+![](./figures/02-time-series-regression/output_52_0.png)
 
 
 
@@ -544,7 +545,7 @@ show()
 ```
 
 
-![png](output_53_0.png)
+![](./figures/02-time-series-regression/output_53_0.png)
 
 
 The autocovariance function decrease rapidly the $95\%$ CI (red dashed lines). This series is a reasonably stationary series. It is an estimation of $x_t - x_{t-1} / x_{t-1}$ when this quantity is small. This can be usefull for the analysis of the return. 
@@ -578,7 +579,7 @@ $$\theta = \frac{1 \pm \sqrt{1 - 4\rho_u(1)}}{2\rho_u(1)}.$$
 Finally, by replacing this expression within $\gamma_u(0)$, we have an expression for $\sigma_w^2$
 $$\sigma_w^2 = \left(1 + \frac{1 \pm \sqrt{1 - 4\rho_u(1)}}{2\rho_u^2(1)} - \frac{1}{\rho_u(1)}\right)^{-1}\gamma_u(0).$$
 
-## Exercise 2.9
+### Exercise 2.9
 
 
 ```julia
@@ -615,7 +616,7 @@ show()
 ```
 
 
-![png](output_60_0.png)
+![](./figures/02-time-series-regression/output_60_0.png)
 
 
 It does not appear a significant trend in the sea surface temperature in the data.
@@ -642,7 +643,7 @@ show()
 ```
 
 
-![png](output_65_0.png)
+![](./figures/02-time-series-regression/output_65_0.png)
 
 
 
@@ -668,7 +669,7 @@ big_perio = sortperm(p.power, rev=true);
 
 So, the most important peak correspond to one cycle every $12$, $240$ and $60$ months. The cycle every $60$ months (five years) reflect the El Nino effect. The one that appears every $240$ months ($20$ years) may reflect a particularly important and intense El Nino effect.
 
-## Exercise 2.10
+### Exercise 2.10
 
 
 ```julia
@@ -692,7 +693,7 @@ show()
 ```
 
 
-![png](output_72_0.png)
+![](./figures/02-time-series-regression/output_72_0.png)
 
 
 These series resemble the most to random walks with linear trends. The series are probably not stationary, because their mean functions depend on time.
@@ -724,7 +725,7 @@ show()
 ```
 
 
-![png](output_75_0.png)
+![](./figures/02-time-series-regression/output_75_0.png)
 
 
 
@@ -739,7 +740,7 @@ show()
 ```
 
 
-![png](output_76_0.png)
+![](./figures/02-time-series-regression/output_76_0.png)
 
 
 
@@ -754,7 +755,7 @@ show()
 ```
 
 
-![png](output_77_0.png)
+![](./figures/02-time-series-regression/output_77_0.png)
 
 
 The transformation of the data make the series stationary. The correlation between the Gas and Oil series is likely to be high.
@@ -773,7 +774,7 @@ show()
 ```
 
 
-![png](output_79_0.png)
+![](./figures/02-time-series-regression/output_79_0.png)
 
 
 The correlation when $h = 0$ is high (around $0.7$) and indicate the influence between the two series. Moreover, the small correlation values when gas leads oil is significant.
@@ -817,7 +818,7 @@ show()
 ```
 
 
-![png](output_81_0.png)
+![](./figures/02-time-series-regression/output_81_0.png)
 
 
 We have fit the data using the lowess method, related to nearest neighbor regression. We can see few outliers in the data. Only the first model exhibit almost linear relationship.
@@ -883,7 +884,7 @@ show()
 ```
 
 
-![png](output_87_0.png)
+![](./figures/02-time-series-regression/output_87_0.png)
 
 
 
@@ -898,12 +899,12 @@ show()
 ```
 
 
-![png](output_88_0.png)
+![](./figures/02-time-series-regression/output_88_0.png)
 
 
 The residuals appear to be normal, and look the original series. Don't know how to analyze that.
 
-## Exercise 2.11
+### Exercise 2.11
 
 
 ```julia
@@ -960,7 +961,7 @@ show()
 ```
 
 
-![png](output_93_0.png)
+![](./figures/02-time-series-regression/output_93_0.png)
 
 
 We see an increasing linear trend in the data. The two smoothing methods exhibit different results. The loess method results in a smoother estimation of the trend.
